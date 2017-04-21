@@ -19,4 +19,4 @@ export class Greeter {
 };
 
 var greeter = new Greeter("Hello, world!");
-console.log(greet());
+console.log(greeter.greet());
