@@ -20,3 +20,4 @@ export class Greeter {
 
 var greeter = new Greeter("Hello, world!");
 console.log(greeter.greet());
+
