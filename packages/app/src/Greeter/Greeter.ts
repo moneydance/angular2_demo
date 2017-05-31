@@ -3,10 +3,8 @@
  *
  */
 export class Greeter {
-
     /**
 	 * @param greeting public string property
-	 *
 	 */
 	constructor(public greeting: string) { }
 
@@ -18,6 +16,5 @@ export class Greeter {
     }
 };
 
-var greeter = new Greeter("Sup Sup Sup");
+var greeter = new Greeter("sup sup sup");
 console.log(greeter.greet());
-

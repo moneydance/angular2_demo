@@ -1,16 +1,13 @@
 import * as fs from 'fs';
 import * as TypedocWebpackPlugin from 'typedoc-webpack-plugin';
 
-export class BaseConfig {
+export default class BaseConfig {
 	public constructor() {};
 	public get tsconfig():any {
 		const tsconfigFilePath = process.env.APP_ROOT + 'tsconfig.json';
 		return JSON.parse(fs.readFileSync(tsconfigFilePath, 'utf8'));
 	};
 	public paths:any = {
-		ts: {
-			path: 'src/**/*.ts',
-		},
 		entry: {
 			path: ['src/Greeter/Greeter.ts'],
 		},
@@ -50,8 +47,5 @@ export class BaseConfig {
 				{test: /.tsx?$/, loader: 'angular2-template-loader!awesome-typescript-loader'}
 			]
 		},
-		plugins: [
-			new TypedocWebpackPlugin(this.typedoc)
-		]
 	};
 }
