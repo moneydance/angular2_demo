@@ -27,7 +27,7 @@ export class Gulpfile {
 	tsc() {
 		return gulp.src(config.paths.entry.path)
 			.pipe(named())
-			.pipe(webpack(config.webpack));
+			.pipe(webpack(config.webpack))
 			.pipe(gulp.dest(config.paths.dist.path));
 	}
 
@@ -41,19 +41,8 @@ export class Gulpfile {
 	}
 
 	/**
-	 * Task to build jsdoc documentation in README.md
-	 */
-	@Task('doc')
-	doc() {
-		return gulp.src(config.paths.ts.path)
-			.pipe(typedoc(config.typedoc));
-	}
-
-	/**
 	 * Default Task
 	 */
-	@SequenceTask('default')
-	default() {
-		return ['compile', 'doc'];
-	}
+	@Task('default', ['compile'])
+	default() {}
 }

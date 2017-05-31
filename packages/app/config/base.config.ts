@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import * as TypedocWebpackPlugin from 'typedoc-webpack-plugin';
 
 export class BaseConfig {
 	public constructor() {};
@@ -37,17 +38,20 @@ export class BaseConfig {
 	};
 	public webpack:any = {
 		watch: true,
-		devtool: 'source-map',
+		devtool: 'inline-source-map',
 		resolve: {
-			extensions: ['.ts', '.tsx'],
+			extensions: ['', '.json', '.ts', '.tsx'],
 		},
 		/* Documentation https://webpack.github.io/docs/loaders.html#introduction
 		 * Please Note that loaders are applied in right to left order (I know really silly).
 		 */
 		module: {
 			loaders: [
-				{test: /.tsx?$/, loader: ['angular2-template-loader!awesome-typescript-loader'},
+				{test: /.tsx?$/, loader: 'angular2-template-loader!awesome-typescript-loader'}
 			]
-		}
+		},
+		plugins: [
+			new TypedocWebpackPlugin(this.typedoc)
+		]
 	};
 }

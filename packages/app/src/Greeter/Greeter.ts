@@ -18,6 +18,6 @@ export class Greeter {
     }
 };
 
-var greeter = new Greeter("Hello, world!");
+var greeter = new Greeter("Sup Sup Sup");
 console.log(greeter.greet());
 
