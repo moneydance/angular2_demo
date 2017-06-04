@@ -1,0 +1,8 @@
+version: '1',
+service:
+  app:
+    build:${APP_ROOT}
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${APP_ROOT}/src:/src

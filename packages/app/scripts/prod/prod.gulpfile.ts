@@ -1,8 +1,7 @@
-/*
 import {Gulpclass, Task, SequenceTask} from 'gulpclass/Decorators';
 import * as typedoc from 'gulp-typedoc';
 
-import BaseGulpFile from 'base.gulpfile';
+import BaseGulpFile from '../base/base.gulpfile';
 
 export default class ProdGulpFile extends BaseGulpFile {
 	@Task('doc')
@@ -16,4 +15,4 @@ export default class ProdGulpFile extends BaseGulpFile {
 		return ['compile', 'doc'];
 	}
 }
-*/
+

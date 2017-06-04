@@ -4,7 +4,7 @@ import * as TypedocWebpackPlugin from 'typedoc-webpack-plugin';
 export default class BaseConfig {
 	public constructor() {};
 	public get tsconfig():any {
-		const tsconfigFilePath = process.env.APP_ROOT + 'tsconfig.json';
+		const tsconfigFilePath = '../../tsconfig.json';
 		return JSON.parse(fs.readFileSync(tsconfigFilePath, 'utf8'));
 	};
 	public paths:any = {
