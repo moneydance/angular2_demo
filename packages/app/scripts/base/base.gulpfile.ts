@@ -1,16 +1,13 @@
-import {Gulpclass, Task, SequenceTask} from 'gulpclass/Decorators';
+import {Gulpclass, Task, SequenceTask} from 'gulpclass-extendable/Decorators';
 import * as gulp from 'gulp';
 import * as rimraf from 'gulp-rimraf';
 import * as typedoc from 'gulp-typedoc';
 import * as webpack from 'webpack-stream';
 import * as named from 'vinyl-named';
 
-import Config from '../../config';
-
-@Gulpclass()
-export default class BaseGulpfile {
-	//Instance of config file;
-	public config = new Config();
+@Gulpclass
+export class BaseGulpFile {
+  constructor(private config:any) {}
 	/**
 	 * Task to clean the dist folder by running force rm -rf on it.
 	 */

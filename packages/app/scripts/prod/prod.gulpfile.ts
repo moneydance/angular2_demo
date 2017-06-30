@@ -1,13 +1,18 @@
-import {Gulpclass, Task, SequenceTask} from 'gulpclass/Decorators';
+import {Gulpclass, Task, SequenceTask} from 'gulpclass-extendable/Decorators';
+import { BaseGulpFile } from '../base/base.gulpfile';
 import * as typedoc from 'gulp-typedoc';
+import * as gulp from 'gulp';
 
-import BaseGulpFile from '../base/base.gulpfile';
+@Gulpclass
+export class ProdGulpFile extends BaseGulpFile {
+  constructor(config:any) {
+    super(config);
+  }
 
-export default class ProdGulpFile extends BaseGulpFile {
-	@Task('doc')
+  @Task('doc')
 	doc() {
-		return gulp.src(config.path.ts.path)
-			.pipe(typedoc(config.typedoc));
+		return gulp.src(this.config.path.ts.path)
+			.pipe(typedoc(this.config.typedoc));
 	}
 
 	@SequenceTask('default')
