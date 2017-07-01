@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 const dir = __dirname;
-const tsconfigPath = path.join(dir, "../..", "tsconfig.json");
+const baseDir = path.join(dir, "../..");
 
 export class BaseConfig {
   tsconfig:any;
@@ -9,13 +9,15 @@ export class BaseConfig {
   tslint:any;
   rimraf:any;
   webpack:any;
+  baseDir:string;
 
   constructor() {
+    this.baseDir = baseDir;
     this.paths = {
-		  entry: { path: ['src/Greeter/Greeter.ts'] },
-		  dist: { path: 'dist/' },
-		  doc: { path: 'doc/' },
-      tsconfig: { path: tsconfigPath }
+		  entry: { path: [path.join(baseDir, 'src/Greeter/Greeter.ts')] },
+		  dist: { path: path.join(baseDir, 'dist/') },
+      doc: { path: path.join(baseDir, 'src/') },
+      tsconfig: { path: path.join(baseDir, 'tsconfig.json') }
 	  };
     this.tsconfig = JSON.parse(fs.readFileSync(this.paths.tsconfig.path, 'utf8'));
     this.tslint = { formatter: 'stylish' };
@@ -29,15 +31,10 @@ export class BaseConfig {
 				  {
             test: /.tsx?$/,
             loader: 'angular2-template-loader!awesome-typescript-loader',
-            options: {
-              configFileName: this.paths.tsconfig.path
-            }
+            options: { configFileName: this.paths.tsconfig.path }
           }
 			  ]
 		  },
     };
   }
 }
-
-
-
