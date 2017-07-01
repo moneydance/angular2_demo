@@ -1,4 +1,4 @@
-import {Gulpclass, Task, SequenceTask} from 'gulpclass-extendable/Decorators';
+import { Gulpclass, Task, SequenceTask } from 'gulpclass-extendable/Decorators';
 import { BaseGulpFile } from '../base/base.gulpfile';
 import * as gulp from 'gulp';
 import { DevConfig } from "../../config/dev/dev.config";
@@ -7,7 +7,6 @@ import { DevConfig } from "../../config/dev/dev.config";
 export class DevGulpFile extends BaseGulpFile {
   constructor(config:any) {
     super(config);
-    console.log(config);
   }
 }
 

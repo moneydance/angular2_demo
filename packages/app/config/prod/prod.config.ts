@@ -6,14 +6,14 @@ export class ProdConfig extends BaseConfig {
   constructor() {
     super();
     this.typedoc = {
-		  module: this.tsconfig.compilerOptions.module,
-		  target: this.tsconfig.compilerOptions.target,
-		  includeDeclarations: true,
-		  excludeExternals: true,
-		  out: this.paths.doc.path,
-		  hideGenerator: true,
-		  name: 'App docs'
-	  };
+      module: this.tsconfig.compilerOptions.module,
+      target: this.tsconfig.compilerOptions.target,
+      includeDeclarations: true,
+      excludeExternals: true,
+      out: this.paths.doc.path,
+      hideGenerator: true,
+      name: 'App docs'
+    };
     const webpackOverride = { watch: false };
     Object.assign(this.webpack, webpackOverride);
   }
