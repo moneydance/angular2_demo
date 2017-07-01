@@ -7,7 +7,7 @@ import * as named from 'vinyl-named';
 
 @Gulpclass
 export class BaseGulpFile {
-  constructor(private config:any) {}
+  constructor(protected config:any) {}
 	/**
 	 * Task to clean the dist folder by running force rm -rf on it.
 	 */

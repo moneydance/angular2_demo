@@ -38,7 +38,7 @@
     "gulp-rimraf": "0.2.0",
     "typedoc": "0.7.1",
     "gulp-typedoc": "2.0.2",
-    "gulpclass-extendable": "0.0.7",
+    "gulpclass-extendable": "0.0.8",
     "rimraf": "2.5.4",
     "ts-node": "3.0.2",
     "tslint": "5.1.0",
