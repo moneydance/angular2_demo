@@ -3,17 +3,17 @@
  *
  */
 export class Greeter {
-    /**
-	 * @param greeting public string property
+  /**
+   * @param greeting public string property
 	 */
-	constructor(public greeting: string) { }
+  constructor(public greeting: string) { }
 
-	/**
-	 * @returns [[Greeter.greeting]]
-	 */
-	greet() {
-        return this.greeting;
-    }
+  /**
+   * @returns [[Greeter.greeting]]
+   */
+  greet() {
+    return this.greeting;
+  }
 };
 
 var greeter = new Greeter("sup sup sup");
