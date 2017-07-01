@@ -16,5 +16,5 @@ export class Greeter {
   }
 };
 
-var greeter = new Greeter("sup sup sup");
+var greeter = new Greeter("sup sup");
 console.log(greeter.greet());
