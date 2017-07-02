@@ -1,15 +1,15 @@
-version: '1',
+version: '3.0'
 services:
   app:
     build: ./packages/app
     volumes:
-      - ./packages/app/src:/src
-      - dist:/dist
+      - ./packages/app/src:app/src
+      - dist:app/dist
   nginx:
     image: nginx
     ports:
-      -"8080:8080"
+      - "8080:8080"
     volumes:
       - dist:/app
 volumes:
-  dist:
+  dist: {}

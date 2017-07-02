@@ -9,9 +9,6 @@
       "email": "bpusey@bu.edu"
     }
   ],
-  "scripts": {
-    "start": "ts-node ./scripts/runner.ts"
-  },
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
@@ -39,6 +36,8 @@
     "gulp-typedoc": "2.0.2",
     "gulpclass-extendable": "0.0.8",
     "rimraf": "2.5.4",
+    "dotenv-expand":"4.0.1",
+    "dotenv": "4.0.0",
     "ts-node": "3.0.2",
     "node-sass": "4.5.3",
     "tslint": "5.1.0",
