@@ -1,8 +1,15 @@
 version: '1',
-service:
+services:
   app:
-    build:${APP_ROOT}
-    ports:
-      - "8080:8080"
+    build: ./packages/app
     volumes:
-      - ${APP_ROOT}/src:/src
+      - ./packages/app/src:/src
+      - dist:/dist
+  nginx:
+    image: nginx
+    ports:
+      -"8080:8080"
+    volumes:
+      - dist:/app
+volumes:
+  dist:
