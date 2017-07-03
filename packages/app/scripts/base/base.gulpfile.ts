@@ -1,10 +1,12 @@
 import { Gulpclass, Task, SequenceTask } from 'gulpclass-extendable/Decorators';
+import * as path from 'path';
 import * as dotenv from 'dotenv';
 import * as dotenvExpand from 'dotenv-expand';
 import * as gulp from 'gulp';
 import * as del from 'del';
 import * as typedoc from 'gulp-typedoc';
-import * as webpack from 'webpack-stream';
+import * as webpackStream from 'webpack-stream';
+import * as webpack from 'webpack';
 import * as named from 'vinyl-named';
 
 @Gulpclass
@@ -15,14 +17,13 @@ export class BaseGulpFile {
    */
   @Task('clean')
   clean(cb) {
-    del(this.config.paths.dist.path)
+    del(path.join(this.config.paths.dist.path, "**/*"))
     return cb();
   }
 
   /**
    * task to set environments
    */
-
   @Task('env')
   env(cb) {
       let env = dotenv.config(this.config.paths.env);
@@ -37,7 +38,7 @@ export class BaseGulpFile {
   tsc() {
     return gulp.src(this.config.paths.entry.path)
       .pipe(named())
-      .pipe(webpack(this.config.webpack))
+      .pipe(webpackStream(this.config.webpack, webpack))
       .pipe(gulp.dest(this.config.paths.dist.path));
   }
 

@@ -11,7 +11,7 @@ export class ProdGulpFile extends BaseGulpFile {
 
   @Task('doc')
   doc() {
-    return gulp.src(this.config.path.ts.path)
+    return gulp.src(this.config.paths.doc.in.path)
       .pipe(typedoc(this.config.typedoc));
   }
 
