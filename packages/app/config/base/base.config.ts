@@ -15,7 +15,7 @@ export class BaseConfig {
     this.baseDir = baseDir;
     this.paths = {
       entry: { path: [path.join(this.baseDir, 'src/Greeter/Greeter.ts')] },
-      dist: { path: path.join(this.baseDir, 'dist/') },
+      dist: { path: path.join(this.baseDir, 'dist/*') },
       doc: { path: path.join(this.baseDir, 'src/') },
       tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') }
     };
