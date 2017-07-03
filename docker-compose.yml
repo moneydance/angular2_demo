@@ -1,8 +1,18 @@
-version: '1',
-service:
-  app:
-    build:${APP_ROOT}
-    ports:
-      - "8080:8080"
+version: '3.0'
+services:
+  base:
+    build: ./packages/app
+    env_file: .env
     volumes:
-      - ${APP_ROOT}/src:/src
+      - ./packages/app/src:/app/src
+      - dist:/app/dist
+  nginx:
+    image: nginx
+    env_file: .env
+    ports:
+      - "80:81"
+    volumes:
+      - dist:/app
+volumes:
+  dist: {}
+

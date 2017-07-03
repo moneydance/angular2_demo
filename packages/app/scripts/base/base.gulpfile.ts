@@ -1,6 +1,8 @@
 import { Gulpclass, Task, SequenceTask } from 'gulpclass-extendable/Decorators';
+import * as dotenv from 'dotenv';
+import * as dotenvExpand from 'dotenv-expand';
 import * as gulp from 'gulp';
-import * as rimraf from 'gulp-rimraf';
+import * as del from 'del';
 import * as typedoc from 'gulp-typedoc';
 import * as webpack from 'webpack-stream';
 import * as named from 'vinyl-named';
@@ -12,9 +14,20 @@ export class BaseGulpFile {
    * Task to clean the dist folder by running force rm -rf on it.
    */
   @Task('clean')
-  clean() {
-    return gulp.src(this.config.paths.dist.path)
-      .pipe(rimraf(this.config.rimraf));
+  clean(cb) {
+    del(this.config.paths.dist.path)
+    return cb();
+  }
+
+  /**
+   * task to set environments
+   */
+
+  @Task('env')
+  env(cb) {
+      let env = dotenv.config(this.config.paths.env);
+      dotenvExpand(env);
+      return cb();
   }
 
   /**
@@ -33,7 +46,7 @@ export class BaseGulpFile {
    */
   @SequenceTask('compile')
   compile() {
-    return ['clean', 'webpack'];
+    return [['clean', 'env'], 'webpack'];
   }
 
   /**
