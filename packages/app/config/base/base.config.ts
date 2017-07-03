@@ -6,7 +6,6 @@ const baseDir = path.join(dir, "../..");
 export class BaseConfig {
   readonly baseDir:string;
   paths:any;
-  readonly tsconfig:any;
   tslint:any;
   rules:any;
   webpack:any;
@@ -18,12 +17,11 @@ export class BaseConfig {
       dist: { path: path.join(this.baseDir, 'dist/') },
       tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') }
     };
-    this.tsconfig = JSON.parse(fs.readFileSync(this.paths.tsconfig.path, 'utf8'));
     this.tslint = {
       extends: "tslint-config-airbnb",
       rules: {
         'no-increment-decrement': false,
-        indent: [ true, 'tab' ],
+        'indent': [ true, 'tab' ],
 		'ter-indent': [ true, 'tab', { SwitchCase: 1 } ],
 		'trailing-comma': [ false ]
       }

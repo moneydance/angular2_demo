@@ -17,8 +17,8 @@ export class ProdConfig extends BaseConfig {
     Object.assign(this.webpack, webpackOverride);
     Object.assign(this.paths, pathsOverride);
     this.typedoc = {
-      module: this.tsconfig.compilerOptions.module,
-      target: this.tsconfig.compilerOptions.target,
+      module: 'commonjs',
+      target: 'es5',
       includeDeclarations: true,
       excludeExternals: true,
       out: this.paths.doc.out.path,
