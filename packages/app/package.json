@@ -42,8 +42,8 @@
     "typedoc": "0.7.1",
     "gulp-typedoc": "2.0.2",
     "gulpclass-extendable": "0.0.8",
-    "rimraf": "2.5.4",
-    "dotenv-expand":"4.0.1",
+    "gulp-util": "3.0.8",
+	"dotenv-expand":"4.0.1",
     "dotenv": "4.0.0",
     "ts-node": "3.0.2",
     "node-sass": "4.5.3",
@@ -51,7 +51,7 @@
     "typescript": "2.2.2",
     "vinyl-named": "1.1.0",
     "webpack": "2.6.1",
-    "webpack-stream": "3.2.0"
+    "webpack-stream-fixed": "3.2.2"
   },
   "engine": "node >= 0.10.x"
 }

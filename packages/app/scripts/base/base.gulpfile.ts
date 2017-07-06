@@ -5,9 +5,10 @@ import * as dotenvExpand from 'dotenv-expand';
 import * as gulp from 'gulp';
 import * as del from 'del';
 import * as typedoc from 'gulp-typedoc';
-import * as webpackStream from 'webpack-stream';
+import * as webpackStream from 'webpack-stream-fixed';
 import * as webpack from 'webpack';
 import * as named from 'vinyl-named';
+import * as gutil from 'gulp-util';
 
 @Gulpclass
 export class BaseGulpFile {
@@ -39,6 +40,9 @@ export class BaseGulpFile {
     return gulp.src(this.config.paths.entry.path)
       .pipe(named())
       .pipe(webpackStream(this.config.webpack, webpack))
+      .on('error', function(error) {
+		this.emit('end');
+      })
       .pipe(gulp.dest(this.config.paths.dist.path));
   }
 

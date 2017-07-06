@@ -6,7 +6,6 @@ const baseDir = path.join(dir, "../..");
 export class BaseConfig {
   readonly baseDir:string;
   paths:any;
-  tslint:any;
   rules:any;
   webpack:any;
 
@@ -15,17 +14,10 @@ export class BaseConfig {
     this.paths = {
       entry: { path: [path.join(this.baseDir, 'src/Greeter/Greeter.ts')] },
       dist: { path: path.join(this.baseDir, 'dist/') },
-      tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') }
+      tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') },
+      tslint: { path: path.join(this.baseDir, 'config/tslint.json') },
+      ignored: { path: path.join(this.baseDir, '!(src)') }
     };
-    this.tslint = {
-      extends: "tslint-config-airbnb",
-      rules: {
-        'no-increment-decrement': false,
-        'indent': [ true, 'tab' ],
-		'ter-indent': [ true, 'tab', { SwitchCase: 1 } ],
-		'trailing-comma': [ false ]
-      }
-    },
     this.rules = {
 		tslint: {
 		  test: /\.ts$/,
@@ -33,12 +25,8 @@ export class BaseConfig {
           enforce: 'pre',
           options: {
             formatter: 'stylish',
-			typeCheck: true,
-			tsConfigFile: this.paths.tsconfig.path,
-			emitErrors: true,
 			failOnHint: true,
-            configuration: this.tslint,
-			configFile: false
+			configFile: this.paths.tslint.path
           }
         },
         ts: {
@@ -69,6 +57,11 @@ export class BaseConfig {
     };
     this.webpack = {
       watch: true,
+      watchOptions: {
+        aggregateTimeout: 0,
+        poll: 1000,
+		ignored: this.paths.ignored.path
+      },
       devtool: 'inline-source-map',
       resolve: { extensions: ['.json', '.ts', '.tsx'] },
       module: {

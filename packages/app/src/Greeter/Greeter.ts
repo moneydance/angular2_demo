@@ -14,7 +14,7 @@ export class Greeter {
   greet() {
     return this.greeting;
   }
-};
+}
 
-var greeter = new Greeter("heyaaaaaaaaa");
+const greeter = new Greeter('heyaaaa');
 console.log(greeter.greet());
