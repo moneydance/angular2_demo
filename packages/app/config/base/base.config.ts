@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as webpack from 'webpack';
 const dir = __dirname;
 const baseDir = path.join(dir, "../..");
 
@@ -16,7 +17,6 @@ export class BaseConfig {
       dist: { path: path.join(this.baseDir, 'dist/') },
       tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') },
       tslint: { path: path.join(this.baseDir, 'config/tslint.json') },
-      ignored: { path: path.join(this.baseDir, '!(src)') }
     };
     this.rules = {
 		tslint: {
@@ -58,15 +58,14 @@ export class BaseConfig {
     this.webpack = {
       watch: true,
       watchOptions: {
-        aggregateTimeout: 0,
+        aggregateTimeout: 200,
         poll: 1000,
-		ignored: this.paths.ignored.path
-      },
+	  },
       devtool: 'inline-source-map',
       resolve: { extensions: ['.json', '.ts', '.tsx'] },
       module: {
         rules: [this.rules.tslint, this.rules.ts]
-      }
+      },
     };
   }
 }

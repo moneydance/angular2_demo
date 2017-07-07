@@ -38,11 +38,9 @@ export class BaseGulpFile {
   @Task('webpack')
   tsc() {
     return gulp.src(this.config.paths.entry.path)
-      .pipe(named())
+	  .pipe(named())
       .pipe(webpackStream(this.config.webpack, webpack))
-      .on('error', function(error) {
-		this.emit('end');
-      })
+      .on('error', function(error) {})
       .pipe(gulp.dest(this.config.paths.dist.path));
   }
 

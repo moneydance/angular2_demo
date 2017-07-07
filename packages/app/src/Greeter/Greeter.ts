@@ -1,3 +1,5 @@
+import './HelloWorld';
+
 /**
  * this is a simple Greeter Class
  *
@@ -16,5 +18,5 @@ export class Greeter {
   }
 }
 
-const greeter = new Greeter('heyaaaa');
+const greeter = new Greeter('heyaa');
 console.log(greeter.greet());
