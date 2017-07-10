@@ -4,8 +4,8 @@ import * as gulp from 'gulp';
 
 @Gulpclass
 export class DevGulpFile extends BaseGulpFile {
-  constructor(config:any) {
-    super(config);
-  }
+	constructor(config:any) {
+		super(config);
+	}
 }
 

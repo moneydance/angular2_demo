@@ -6,8 +6,8 @@ import './HelloWorld';
  */
 export class Greeter {
 	/**
-     * @param greeting public string property
-     */
+	 * @param greeting public string property
+	 */
 	constructor(public greeting: string) {}
 
 	/**

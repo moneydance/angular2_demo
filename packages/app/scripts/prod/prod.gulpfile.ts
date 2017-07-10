@@ -5,19 +5,19 @@ import * as gulp from 'gulp';
 
 @Gulpclass
 export class ProdGulpFile extends BaseGulpFile {
-  constructor(config:any) {
-    super(config);
-  }
+	constructor(config:any) {
+		super(config);
+	}
 
-  @Task('doc')
-  doc() {
-    return gulp.src(this.config.paths.doc.in.path)
-      .pipe(typedoc(this.config.typedoc));
-  }
+	@Task('doc')
+	doc() {
+		return gulp.src(this.config.paths.doc.in.path)
+			.pipe(typedoc(this.config.typedoc));
+	}
 
-  @SequenceTask('default')
-  default() {
-    return ['compile', 'doc'];
-  }
+	@SequenceTask('default')
+	default() {
+		return ['compile', 'doc'];
+	}
 }
 
