@@ -44,5 +44,5 @@ export class BaseGulpFile {
 	 * Default Task
 	 */
 	@Task('default', ['compile'])
-	default() {}
+	public default() {}
 }

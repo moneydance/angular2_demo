@@ -8,12 +8,14 @@ export class Greeter {
 	/**
 	 * @param greeting public string property
 	 */
-	constructor(public greeting: string) {}
+	constructor(public greeting: string) {
+		console.log('I am constructing something its really really really cool');
+	}
 
 	/**
 	 * @returns [[Greeter.greeting]]
 	 */
-	greet() {
+	public greet() {
 		let x = 1;
 		x++;
 		return this.greeting;

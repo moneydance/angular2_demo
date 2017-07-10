@@ -18,7 +18,7 @@ export class BaseConfig {
 			entry: { path: [path.join(this.baseDir, 'src/Greeter/Greeter.ts')] },
 			dist: { path: path.join(this.baseDir, 'dist/') },
 			tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') },
-			tslint: { path: path.join(this.baseDir, 'config/tslint.json') },
+			tslint: { path: path.join(this.baseDir, 'config/tslint.json') }
 		};
 		this.prettier = {
 			printWidth: 80,
@@ -29,7 +29,7 @@ export class BaseConfig {
 			bracketSpacing: true,
 			extensions: ['.ts', '.tsx', '.sass', '.json'],
 			parser: "typescript"
-		}
+		};
 		this.rules = {
 			tslint: {
 				test: /\.ts$/,
@@ -64,15 +64,12 @@ export class BaseConfig {
 			},
 			sass: {
 				test: /\.scss$/,
-				use: ['style-loader', 'css-loader', 'sass-loader'],
+				use: ['style-loader', 'css-loader', 'sass-loader']
 			}
 		};
 		this.webpack = {
 			watch: true,
-			watchOptions: {
-				aggregateTimeout: 200,
-				poll: 1000,
-			},
+			watchOptions: { aggregateTimeout: 200, poll: 1000 },
 			devtool: 'inline-source-map',
 			resolve: { extensions: ['.json', '.ts', '.tsx'] },
 			module: {
