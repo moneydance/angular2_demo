@@ -1,12 +1,14 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as webpack from 'webpack';
+import * as PrettierPlugin from 'prettier-webpack-plugin';
 const dir = __dirname;
 const baseDir = path.join(dir, "../..");
 
 export class BaseConfig {
   readonly baseDir:string;
   paths:any;
+  prettier: any;
   rules:any;
   webpack:any;
 
@@ -18,6 +20,16 @@ export class BaseConfig {
       tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') },
       tslint: { path: path.join(this.baseDir, 'config/tslint.json') },
     };
+    this.prettier = {
+      printWidth: 80,
+      tabWidth: 2,
+      useTabs: true,
+      semi: true,
+      singleQuote: true,
+      bracketSpacing: true,
+      extensions: ['.ts', '.tsx', '.sass', '.json'],
+      parser: "typescript"
+    }
     this.rules = {
 		tslint: {
 		  test: /\.ts$/,
@@ -66,6 +78,7 @@ export class BaseConfig {
       module: {
         rules: [this.rules.tslint, this.rules.ts]
       },
+      plugins: [ new PrettierPlugin(this.prettier) ]
     };
   }
 }

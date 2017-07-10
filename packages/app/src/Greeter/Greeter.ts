@@ -5,17 +5,19 @@ import './HelloWorld';
  *
  */
 export class Greeter {
-  /**
-   * @param greeting public string property
-   */
-  constructor(public greeting: string) { }
+	/**
+     * @param greeting public string property
+     */
+	constructor(public greeting: string) {}
 
-  /**
-   * @returns [[Greeter.greeting]]
-   */
-  greet() {
-    return this.greeting;
-  }
+	/**
+	 * @returns [[Greeter.greeting]]
+	 */
+	greet() {
+		let x = 1;
+		x++;
+		return this.greeting;
+	}
 }
 
 const greeter = new Greeter('heyaa');

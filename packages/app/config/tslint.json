@@ -1,10 +1,10 @@
 {
     "extends": "tslint-config-airbnb",
-"    rules": {
-    "    no-increment-decrement": false,
-    "    indent": [ true, "tab" ],
-    "    ter-indent": [ true, "tab", { "SwitchCase": 1 } ],
-    "    trailing-comma": [ false ]
+    "rules": {
+        "no-increment-decrement": false,
+        "indent": [ true, "tab" ],
+        "ter-indent": [ true, "tab", { "SwitchCase": 1 } ],
+        "trailing-comma": [ false ]
     }
 }
 

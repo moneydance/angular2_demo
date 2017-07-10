@@ -1,7 +1,5 @@
 import { Gulpclass, Task, SequenceTask } from 'gulpclass-extendable/Decorators';
 import * as path from 'path';
-import * as dotenv from 'dotenv';
-import * as dotenvExpand from 'dotenv-expand';
 import * as gulp from 'gulp';
 import * as del from 'del';
 import * as typedoc from 'gulp-typedoc';
@@ -23,16 +21,6 @@ export class BaseGulpFile {
   }
 
   /**
-   * task to set environments
-   */
-  @Task('env')
-  env(cb) {
-      let env = dotenv.config(this.config.paths.env);
-      dotenvExpand(env);
-      return cb();
-  }
-
-  /**
    * Task to compile typescript code in src
    */
   @Task('webpack')
@@ -49,7 +37,7 @@ export class BaseGulpFile {
    */
   @SequenceTask('compile')
   compile() {
-    return [['clean', 'env'], 'webpack'];
+    return ['clean', 'webpack'];
   }
 
   /**

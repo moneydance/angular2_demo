@@ -11,8 +11,7 @@ export class ProdConfig extends BaseConfig {
       doc: {
         in: { path: path.join(this.baseDir, 'src/') },
         out: { path: path.join(this.baseDir, 'doc/') }
-      },
-      env : {path: path.join(this.baseDir, 'config/prod/prod.env')}
+      }
     };
     Object.assign(this.webpack, webpackOverride);
     Object.assign(this.paths, pathsOverride);
