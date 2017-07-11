@@ -1,9 +1,0 @@
-{
-	"scripts": {
-		"publish": "lerna publish --yes --skip-npm",
-        "postmypublish": "git push && git push --tags"
-	},
-	"devDependencies": {
-		"lerna": "^2.0.0"
-	}
-}
