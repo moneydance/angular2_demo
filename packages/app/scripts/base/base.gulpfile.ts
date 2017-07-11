@@ -15,7 +15,7 @@ export class BaseGulpFile {
 	 * Task to clean the dist folder by running force rm -rf on it.
 	 */
 	@Task('clean')
-	clean(cb) {
+	public clean(cb) {
 		del(path.join(this.config.paths.dist.path, "**/*"))
 		return cb();
 	}
@@ -24,19 +24,19 @@ export class BaseGulpFile {
 	 * Task to compile typescript code in src
 	 */
 	@Task('webpack')
-	tsc() {
+	public tsc() {
 		return gulp.src(this.config.paths.entry.path)
 			.pipe(named())
 			.pipe(webpackStream(this.config.webpack, webpack))
 			.on('error', function(error) {})
 			.pipe(gulp.dest(this.config.paths.dist.path));
-  }
+	}
 
 	/**
 	 * Task to compile code base
 	 */
 	@SequenceTask('compile')
-	compile() {
+	public compile() {
 		return ['clean', 'webpack'];
 	}
 

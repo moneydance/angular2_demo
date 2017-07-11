@@ -6,11 +6,11 @@ const dir = __dirname;
 const baseDir = path.join(dir, "../..");
 
 export class BaseConfig {
-	readonly baseDir:string;
-	paths:any;
-	prettier: any;
-	rules:any;
-	webpack:any;
+	public readonly baseDir:string;
+	public paths:any;
+	public prettier: any;
+	public rules:any;
+	public webpack:any;
 
 	constructor() {
 		this.baseDir = baseDir;

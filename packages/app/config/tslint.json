@@ -7,8 +7,10 @@
 		"tslint-config-prettier"
 	],
 	"rules": {
+		"typedef-whitespace": [false],
 		"no-increment-decrement": false,
-		"no-console": [ false ]
+		"array-bracket-spacing": [false],
+		"no-console": [false]
 	}
 }
 

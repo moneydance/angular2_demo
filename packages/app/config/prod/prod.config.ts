@@ -2,7 +2,7 @@ import { BaseConfig } from '../base/base.config';
 import * as path from 'path';
 
 export class ProdConfig extends BaseConfig {
-	typedoc:any;
+	public typedoc:any;
 
 	constructor() {
 		super();

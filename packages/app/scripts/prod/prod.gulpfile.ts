@@ -10,13 +10,13 @@ export class ProdGulpFile extends BaseGulpFile {
 	}
 
 	@Task('doc')
-	doc() {
+	public doc() {
 		return gulp.src(this.config.paths.doc.in.path)
 			.pipe(typedoc(this.config.typedoc));
 	}
 
 	@SequenceTask('default')
-	default() {
+	public default() {
 		return ['compile', 'doc'];
 	}
 }
