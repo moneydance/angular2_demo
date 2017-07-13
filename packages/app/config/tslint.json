@@ -10,7 +10,9 @@
 		"typedef-whitespace": [false],
 		"no-increment-decrement": false,
 		"array-bracket-spacing": [false],
-		"no-console": [false]
+		"no-console": [false],
+		"object-literal-sort-keys": [false],
+		"no-unused-variable": [true]
 	}
 }
 

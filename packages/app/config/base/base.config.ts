@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as webpack from 'webpack';
-import * as PrettierPlugin from 'prettier-webpack-plugin';
 const dir = __dirname;
 const baseDir = path.join(dir, "../..");
 
@@ -15,7 +14,8 @@ export class BaseConfig {
 	constructor() {
 		this.baseDir = baseDir;
 		this.paths = {
-			entry: { path: [path.join(this.baseDir, 'src/Greeter/Greeter.ts')] },
+			entry: { path: [path.join(this.baseDir, 'src/main.ts')] },
+			src: { path: path.join(this.baseDir, 'src/') },
 			dist: { path: path.join(this.baseDir, 'dist/') },
 			tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') },
 			tslint: { path: path.join(this.baseDir, 'config/tslint.json') }
@@ -27,10 +27,15 @@ export class BaseConfig {
 			semi: true,
 			singleQuote: true,
 			bracketSpacing: true,
-			extensions: ['.ts', '.tsx', '.sass', '.json'],
 			parser: "typescript"
 		};
 		this.rules = {
+			prettier: {
+				test: /\.tsx?$/,
+				loader: 'prettier-loader',
+				enforce: 'pre',
+				options: this.prettier
+			},
 			tslint: {
 				test: /\.ts$/,
 				loader: 'tslint-loader',
@@ -38,6 +43,8 @@ export class BaseConfig {
 				options: {
 					formatter: 'stylish',
 					failOnHint: true,
+					typeCheck: true,
+                    tsConfigFile: this.paths.tsconfig.path,
 					configFile: this.paths.tslint.path
 				}
 			},
@@ -63,7 +70,7 @@ export class BaseConfig {
 				}
 			},
 			sass: {
-				test: /\.scss$/,
+				test: /\.sass$/,
 				use: ['style-loader', 'css-loader', 'sass-loader']
 			}
 		};
@@ -71,11 +78,18 @@ export class BaseConfig {
 			watch: true,
 			watchOptions: { aggregateTimeout: 200, poll: 1000 },
 			devtool: 'inline-source-map',
-			resolve: { extensions: ['.json', '.ts', '.tsx'] },
-			module: {
-				rules: [this.rules.tslint, this.rules.ts]
+			resolve: {
+				modules: [this.paths.src.path, 'node_modules'],
+				extensions: ['.json', '.ts', '.tsx', '.js', '.jsx']
 			},
-			plugins: [ new PrettierPlugin(this.prettier) ]
+			module: {
+				rules: [this.rules.prettier, this.rules.tslint, this.rules.ts, this.rules.html, this.rules.sass]
+			},
+			plugins: [
+				new webpack.ContextReplacementPlugin(
+					/angular(\\|\/)core(\\|\/)@angular/,
+					this.paths.src.path)
+			]
 		};
 	}
 }

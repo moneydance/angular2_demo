@@ -8,10 +8,7 @@ export class ProdConfig extends BaseConfig {
 		super();
 		const webpackOverride = { watch: false };
 		const pathsOverride = {
-			doc: {
-				in: { path: path.join(this.baseDir, 'src/') },
-				out: { path: path.join(this.baseDir, 'doc/') }
-			}
+			doc: { path: path.join(this.baseDir, 'doc/') }
 		};
 		Object.assign(this.webpack, webpackOverride);
 		Object.assign(this.paths, pathsOverride);
@@ -20,7 +17,7 @@ export class ProdConfig extends BaseConfig {
 			target: 'es5',
 			includeDeclarations: true,
 			excludeExternals: true,
-			out: this.paths.doc.out.path,
+			out: this.paths.src.path,
 			hideGenerator: true,
 			name: 'App docs'
 		};
