@@ -1,10 +1,18 @@
 {
-    "extends": "tslint-config-airbnb",
-"    rules": {
-    "    no-increment-decrement": false,
-    "    indent": [ true, "tab" ],
-    "    ter-indent": [ true, "tab", { "SwitchCase": 1 } ],
-    "    trailing-comma": [ false ]
-    }
+	"extends": [
+		"tslint:latest",
+		"tslint-react",
+		"tslint-eslint-rules",
+		"tslint-config-airbnb",
+		"tslint-config-prettier"
+	],
+	"rules": {
+		"typedef-whitespace": [false],
+		"no-increment-decrement": false,
+		"array-bracket-spacing": [false],
+		"no-console": [false],
+		"object-literal-sort-keys": [false],
+		"no-unused-variable": [true]
+	}
 }
 
