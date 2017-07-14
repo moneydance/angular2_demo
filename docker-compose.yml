@@ -3,6 +3,7 @@ services:
   base:
     build: ./packages/app
     env_file: .env
+    command: npm run gulp
     volumes:
       - ./packages/app/src:/app/src
       - dist:/app/dist
@@ -10,9 +11,9 @@ services:
     image: nginx
     env_file: .env
     ports:
-      - "80:81"
+      - "80:80"
     volumes:
-      - dist:/app
+      - dist:/usr/share/nginx/html
 volumes:
   dist: {}
 
