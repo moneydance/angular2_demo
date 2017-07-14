@@ -9,9 +9,9 @@
 			"email": "bpusey@bu.edu"
 		}
 	],
-  "scripts": {
-    "gulp": "gulp"
-  },
+	"scripts": {
+		"gulp": "gulp"
+	},
 	"dependencies": {
 		"@angular/common": "^4.0.0",
 		"@angular/compiler": "^4.0.0",
@@ -57,7 +57,7 @@
 		"vinyl-named": "1.1.0",
 		"webpack": "2.6.1",
 		"webpack-stream-fixed": "3.2.2",
-    "html-webpack-plugin": "2.29.0"
-  },
+		"html-webpack-plugin": "2.29.0"
+	},
 	"engine": "node >= 0.10.x"
 }

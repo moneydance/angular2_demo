@@ -16,10 +16,10 @@ export class BaseConfig {
 		this.baseDir = baseDir;
 		this.paths = {
 			src: { path: path.join(this.baseDir, 'src/') },
-      entry: { path: [path.join(this.baseDir, 'src/main.ts')] },
-      ignored: {path: ['!**/src/**/*', '**'] },
-      index: { path: path.join(this.baseDir, 'src/index.html') },
-      dist: { path: path.join(this.baseDir, 'dist/') },
+			entry: { path: [path.join(this.baseDir, 'src/main.ts')] },
+			ignored: {path: ['!**/src/**/*', '**'] },
+			index: { path: path.join(this.baseDir, 'src/index.html') },
+			dist: { path: path.join(this.baseDir, 'dist/') },
 			tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') },
 			tslint: { path: path.join(this.baseDir, 'config/tslint.json') }
 		};
@@ -46,8 +46,8 @@ export class BaseConfig {
 				options: {
 					formatter: 'stylish',
 					failOnHint: true,
-          typeCheck: true,
-          tsConfigFile: this.paths.tsconfig.path,
+					typeCheck: true,
+					tsConfigFile: this.paths.tsconfig.path,
 					configFile: this.paths.tslint.path
 				}
 			},
@@ -69,9 +69,9 @@ export class BaseConfig {
 					removeAttributeQuotes: false,
 					caseSensitive: true,
 					customAttrSurround: [
-            [/#/, /(?:)/], [/\*/, /(?:)/],
-            [/\[?\(?/, /(?:)/]
-          ],
+						[/#/, /(?:)/], [/\*/, /(?:)/],
+						[/\[?\(?/, /(?:)/]
+					,
 					customAttrAssign: [ /\)?\]?=/ ]
 				}
 			},
@@ -83,9 +83,9 @@ export class BaseConfig {
 		this.webpack = {
 			watch: true,
 			watchOptions: {
-        aggregateTimeout: 0, poll: 300,
-        ignored: this.paths.ignored.path
-      },
+				aggregateTimeout: 0, poll: 300,
+				ignored: this.paths.ignored.path
+			},
 			devtool: 'inline-source-map',
 			resolve: {
 				modules: [this.paths.src.path, 'node_modules'],
@@ -93,15 +93,15 @@ export class BaseConfig {
 			},
 			module: {
 				rules: [
-          this.rules.prettier, this.rules.tslint,
-          this.rules.ts, this.rules.html, this.rules.sass
-        ]
+					this.rules.prettier, this.rules.tslint,
+					this.rules.ts, this.rules.html, this.rules.sass
+				]
 			},
 			plugins: [
 				new webpack.ContextReplacementPlugin(
 					/angular(\\|\/)core(\\|\/)@angular/,
 					this.paths.src.path),
-        new HtmlWebpackPlugin({template: this.paths.index.path})
+				new HtmlWebpackPlugin({template: this.paths.index.path})
 			]
 		};
 	}

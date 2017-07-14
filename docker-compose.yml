@@ -1,19 +1,19 @@
 version: '3.0'
 services:
-  base:
-    build: ./packages/app
-    env_file: .env
-    command: npm run gulp
-    volumes:
-      - ./packages/app/src:/app/src
-      - dist:/app/dist
-  nginx:
-    image: nginx
-    env_file: .env
-    ports:
-      - "80:80"
-    volumes:
-      - dist:/usr/share/nginx/html
-volumes:
-  dist: {}
+	base:
+		build: ./packages/app
+		env_file: .env
+		command: npm run gulp
+		volumes:
+			- ./packages/app/src:/app/src
+			- dist:/app/dist
+	nginx:
+		image: nginx
+		env_file: .env
+		ports:
+			- "80:80"
+		volumes:
+			- dist:/usr/share/nginx/html
+	volumes:
+		dist: {}
 
