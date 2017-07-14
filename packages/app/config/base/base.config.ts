@@ -23,7 +23,6 @@ export class BaseConfig {
 			src: { path: path.join(this.baseDir, 'src/') },
 			entry: {
 				main: path.join(this.baseDir, 'src/main.ts'),
-				vendor: Object.keys(pkg.dependencies)
 			},
 			ignored: { path: /node_modules/ },
 			index: { path: path.join(this.baseDir, 'src/index.html') },
