@@ -3,13 +3,15 @@ import * as path from 'path';
 import * as gulp from 'gulp';
 import * as del from 'del';
 import * as typedoc from 'gulp-typedoc';
-import * as webpackStream from 'webpack-stream-fixed';
 import * as webpack from 'webpack';
 import * as named from 'vinyl-named';
 import * as gutil from 'gulp-util';
 
 @Gulpclass
 export class BaseGulpFile {
+
+	private run:boolean = false;
+
 	constructor(protected config:any) {}
 	/**
 	 * Task to clean the dist folder by running force rm -rf on it.
@@ -17,19 +19,29 @@ export class BaseGulpFile {
 	@Task('clean')
 	public clean(cb) {
 		del(path.join(this.config.paths.dist.path, "**/*"))
-		return cb();
+		cb();
 	}
 
 	/**
 	 * Task to compile typescript code in src
 	 */
 	@Task('webpack')
-	public tsc() {
-		return gulp.src(this.config.paths.entry.path)
-			.pipe(named())
-			.pipe(webpackStream(this.config.webpack, webpack))
-			.on('error', function(error) {})
-			.pipe(gulp.dest(this.config.paths.dist.path));
+	public pack(cb) {
+		const outputHandler = (err, stats) => {
+			if(err) {
+				new gutil.PluginError(
+					'webpack', `Error on webpack build: ${err.message}`
+				);
+			}
+			gutil.log('[webpack]', stats.toString(this.config.webpack.stats));
+			if (!this.config.webpack.watch) {
+				cb();
+			} else if (!this.run) {
+				this.run = true;
+				cb();
+			}
+		}
+		webpack(this.config.webpack, outputHandler);
 	}
 
 	/**
