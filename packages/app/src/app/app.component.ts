@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
 	template: '<h1>{{title}}</h1>'
 })
 export class AppComponent {
-	public title = 'Minimal NgModule';
+	public title = 'Angula 2 Demo';
 }
