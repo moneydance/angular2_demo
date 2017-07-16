@@ -4,7 +4,6 @@ import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as HappyPack from 'happypack';
-import * as WebpackNotifier from 'webpack-notifier';
 
 const dir = __dirname;
 const baseDir = path.join(dir, "../..");
@@ -18,7 +17,6 @@ export class BaseConfig {
 
 	constructor() {
 		this.baseDir = baseDir;
-		const pkg = require(path.join(this.baseDir, 'package.json'));
 		this.paths = {
 			src: { path: path.join(this.baseDir, 'src/') },
 			entry: {
@@ -123,12 +121,12 @@ export class BaseConfig {
 			},
 			module: {
 				rules: [
-					this.rules.prettier, this.rules.tslint,
-					this.rules.ts, this.rules.html, this.rules.sass
+					this.rules.prettier,
+					this.rules.tslint, this.rules.ts,
+					this.rules.html, this.rules.sass
 				]
 			},
 			plugins: [
-//				new WebpackNotifier(),
 				new ForkTsCheckerWebpackPlugin({tsconfig: this.paths.tsconfig.path}),
 				new HappyPack(this.rules.happyts),
 				new webpack.ContextReplacementPlugin(
