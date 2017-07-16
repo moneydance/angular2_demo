@@ -12,7 +12,10 @@
 		"array-bracket-spacing": [false],
 		"no-console": [false],
 		"object-literal-sort-keys": [false],
-		"no-unused-variable": [true]
+		"no-unused-variable": [true],
+		"import-name": [false],
+		"variable-name": [false],
+		"ordered-imports": [false]
 	}
 }
 
