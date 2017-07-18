@@ -29,6 +29,7 @@
 	"devDependencies": {
 		"@types/node": "^7.0.28",
 		"@types/handlebars": "4.0.33",
+		"@types/angular-ui-router": "1.1.37",
 		"angular2-template-loader": "0.6.2",
 		"ts-loader": "2.2.2",
 		"fork-ts-checker-webpack-plugin": "0.2.6",

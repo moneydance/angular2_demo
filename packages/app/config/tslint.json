@@ -15,7 +15,8 @@
 		"no-unused-variable": [true],
 		"import-name": [false],
 		"variable-name": [false],
-		"ordered-imports": [false]
+		"ordered-imports": [false],
+		"interface-name": [false]
 	}
 }
 
