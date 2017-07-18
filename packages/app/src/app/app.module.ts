@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { UIRouterModule } from '@uirouter/angular';
 
-import { SharedModule } from 'shared/shared.module';
-import { AppComponent, APPSTATE } from './app.component';
+import { SharedModule } from 'core/shared.module';
+import { HomeModule } from './home/home.module';
+import { ProjectsModule } from './projects/projects.module';
+import { AppComponent, APP_STATE } from './app.component';
 
 const states = {
-	states: [APPSTATE],
-	otherwise: { state: APPSTATE.name }
+	states: [APP_STATE]
 };
 
 @NgModule({
-	imports: [SharedModule, UIRouterModule.forRoot(states)],
+	imports: [
+		UIRouterModule.forChild(states),
+		SharedModule,
+		HomeModule,
+		ProjectsModule
+	],
 	declarations: [AppComponent]
 })
 export class AppModule {}

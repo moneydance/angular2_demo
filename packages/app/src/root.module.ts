@@ -1,12 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { UIView } from '@uirouter/angular';
+import { UIView, UIRouterModule } from '@uirouter/angular';
 
-import { AppModule } from './app/app.module';
-import { CoreModule } from './core/core.module';
+import {
+	uiRouterConfig /*AUTHOM_UIROUTER_INSTANCE*/
+} from 'core/uirouter/uirouter.config';
+import { AppModule } from 'app/app.module';
+import { CoreModule } from 'core/core.module';
 
 @NgModule({
-	imports: [BrowserModule, CoreModule, AppModule],
+	imports: [
+		UIRouterModule.forRoot({ config: uiRouterConfig }),
+		BrowserModule,
+		CoreModule,
+		AppModule
+	],
 	bootstrap: [UIView]
 })
 export class RootModule {}
