@@ -1,28 +1,23 @@
-import { Injector, Provider } from '@angular/core';
-import { uiRouterFactory, UIRouter,
-   	StateObject, StateDeclaration,
-	LocationStrategy, RootModule,
-   	StatesModule,
-
-} from '@uirouter/angular';
+import { Injector } from '@angular/core';
+import { UIRouter } from '@uirouter/angular';
 
 export function uiRouterConfig(uiRouter: UIRouter, injector: Injector) {
 	uiRouter.urlMatcherFactory.strictMode(false);
 	uiRouter.urlService.rules.otherwise({ state: injector.get('DEFAULT_STATE') });
 }
-
+/*
 function authomeUIRouterFactory(locationStrategy: LocationStrategy, rootModules: RootModule[], modules: StatesModule[], injector: Injector) {
 	const uiRouter = uiRouterFactory(locationStrategy, rootModules, modules, injector);
 	const register = this.uiRouter.stateRegistry.constructor
 		.prototype.register;
 	uiRouter.stateRegistry.constructor.prototype.register = this.register;
-	uiRouter.stateRegistry.decorator('data', this.registerButts);
+	uiRouter.stateRegistry.decorator('data', this.registerStuff);
 	console.log(uiRouter.stateRegistry);
 	return uiRouter;
 
-	function registerButts(state: StateObject): any {
+	function registerStuff(state: StateObject): any {
 		console.log(state);
-		state.data = state.self.data = { butts: true };
+		state.data = state.self.data = { stuff: true };
 		return state.data;
 	}
 
@@ -41,4 +36,4 @@ export const AUTHOM_UIROUTER_INSTANCE: Provider = {
  	   	UIROUTER_MODULE_TOKEN, Injector]
   }
 ];
-
+*/
