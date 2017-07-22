@@ -12,7 +12,7 @@ import { CoreModule } from 'core/core.module';
 	imports: [
 		UIRouterModule.forRoot({ config: uiRouterConfig }),
 		BrowserModule,
-		CoreModule,
+		CoreModule.forRoot(),
 		AppModule
 	],
 	bootstrap: [UIView]

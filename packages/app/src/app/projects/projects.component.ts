@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthomStateDeclaration } from 'common/uirouter';
+import { Ng2StateDeclaration } from '@uirouter/angular';
 
 @Component({
 	selector: 'projects',
@@ -9,7 +9,7 @@ export class ProjectsComponent {
 	public project = 'Project';
 }
 
-export const PROJECTS_STATE: AuthomStateDeclaration = {
+export const PROJECTS_STATE: Ng2StateDeclaration = {
 	name: 'app.projects',
 	url: '/projects',
 	component: ProjectsComponent

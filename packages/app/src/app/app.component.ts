@@ -1,6 +1,5 @@
 import { Inject, Component } from '@angular/core';
-import { UIRouter } from '@uirouter/angular';
-import { AuthomStateDeclaration } from 'common/uirouter';
+import { UIRouter, Ng2StateDeclaration } from '@uirouter/angular';
 
 @Component({
 	selector: 'app',
@@ -8,14 +7,14 @@ import { AuthomStateDeclaration } from 'common/uirouter';
 })
 export class AppComponent {
 	public title: string = 'hey';
-	public states: AuthomStateDeclaration = this.uiRouter.stateService.get();
+	public states: Ng2StateDeclaration = this.uiRouter.stateService.get();
 	constructor(@Inject(UIRouter) private uiRouter: UIRouter) {
 		console.log(uiRouter);
 		console.log(this.states);
 	}
 }
 
-export const APP_STATE: AuthomStateDeclaration = {
+export const APP_STATE: Ng2StateDeclaration = {
 	name: 'app',
 	url: '/app',
 	component: AppComponent,
