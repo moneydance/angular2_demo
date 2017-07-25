@@ -2,9 +2,7 @@ import { Gulpclass, Task, SequenceTask } from 'gulpclass-extendable/Decorators';
 import * as path from 'path';
 import * as gulp from 'gulp';
 import * as del from 'del';
-import * as typedoc from 'gulp-typedoc';
 import * as webpack from 'webpack';
-import * as named from 'vinyl-named';
 import * as gutil from 'gulp-util';
 
 @Gulpclass

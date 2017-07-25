@@ -1,5 +1,4 @@
-<h1>{{title}}</h1>
-<a *ngFor="let state of states" uiSref="{{state.name}}" uiSrefActive="active">
+<a *ngFor="let state of states" uiSref="{{state.state}}" uiSrefActive="active">
 	{{state.name}}
 </a>
-<ui-view></ui-view>
+<ui-view class="content"></ui-view>

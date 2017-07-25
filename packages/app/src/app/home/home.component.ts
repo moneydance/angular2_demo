@@ -12,11 +12,5 @@ export class HomeComponent {
 export const HOME_STATE: Ng2StateDeclaration = {
 	name: 'app.home',
 	url: '/home',
-	component: HomeComponent,
-	data: {
-		dashboard: {
-			name: 'Home',
-			order: 0
-		}
-	}
+	component: HomeComponent
 };
