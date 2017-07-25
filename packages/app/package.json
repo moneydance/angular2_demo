@@ -13,6 +13,7 @@
 		"gulp": "gulp"
 	},
 	"dependencies": {
+		"compass-mixins": "0.12.10",
 		"@angular/common": "^4.0.0",
 		"@angular/compiler": "^4.0.0",
 		"@angular/core": "^4.0.0",
@@ -24,12 +25,12 @@
 		"@uirouter/angular": "1.0.0-beta.7",
 		"core-js": "^2.4.1",
 		"rxjs": "^5.1.0",
-		"zone.js": "^0.8.4"
+		"zone.js": "^0.8.4",
+		"paper": "0.11.4"
 	},
 	"devDependencies": {
 		"@types/node": "^7.0.28",
 		"@types/handlebars": "4.0.33",
-		"@types/angular-ui-router": "1.1.37",
 		"angular2-template-loader": "0.6.2",
 		"ts-loader": "2.2.2",
 		"fork-ts-checker-webpack-plugin": "0.2.6",
@@ -56,11 +57,13 @@
 		"tslint-react": "3.0.0",
 		"typedoc": "0.7.1",
 		"typescript": "2.2.2",
-		"vinyl-named": "1.1.0",
+		"resolve-url-loader": "2.1.0",
 		"happypack":"4.0.0-beta.1",
 		"webpack": "2.6.1",
 		"webpack-stream-fixed": "3.2.2",
-		"html-webpack-plugin": "2.29.0"
+		"html-webpack-plugin": "2.29.0",
+		"base64-inline-loader": "1.1.0",
+		"to-string-loader": "1.1.5"
 	},
 	"engine": "node >= 0.10.x"
 }

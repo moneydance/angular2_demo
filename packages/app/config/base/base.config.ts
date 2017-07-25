@@ -12,6 +12,7 @@ export class BaseConfig {
 	public readonly baseDir:string;
 	public paths:any;
 	public prettier: any;
+	public extracters:any;
 	public rules:any;
 	public webpack:any;
 
@@ -22,6 +23,7 @@ export class BaseConfig {
 			entry: {
 				main: path.join(this.baseDir, 'src/main.ts'),
 			},
+			compass: { path: path.join(this.baseDir, 'node_modules/compass-mixins/lib') },
 			ignored: { path: /node_modules/ },
 			index: { path: path.join(this.baseDir, 'src/index.html') },
 			dist: { path: path.join(this.baseDir, 'dist/') },
@@ -37,6 +39,33 @@ export class BaseConfig {
 			bracketSpacing: true,
 			parser: "typescript"
 		};
+		const sass = {
+			test: /\.scss$/,
+ 			use: [
+				'css-loader',
+				{
+					loader: 'resolve-url-loader',
+					options: {
+						root: this.paths.src.path,
+						includeRoot: true
+					}
+				},
+				{
+					loader: 'sass-loader',
+					options: {
+						includePaths: [
+							this.paths.compass.path,
+							this.paths.src.path
+						],
+						sourceMap: true
+					}
+				}
+			]
+		};
+		const sassglobal = Object.assign({ exclude: this.paths.src.path }, sass);
+		sassglobal.use.unshift('style-loader');
+		const sassangular = Object.assign({ include: this.paths.src.path }, sass);
+		sassangular.use.unshift('to-string-loader');
 		this.rules = {
 			prettier: {
 				test: /\.tsx?$/,
@@ -96,9 +125,15 @@ export class BaseConfig {
 					customAttrAssign: [ /\)?\]?=/ ]
 				}
 			},
-			sass: {
-				test: /\.sass$/,
-				use: ['style-loader', 'css-loader', 'sass-loader']
+			sassglobal: sassglobal,
+			sassangular: sassangular,
+			base64inline: {
+				test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+				use: 'base64-inline-loader'
+			},
+			url: {
+				test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+				loader: 'url-loader'
 			}
 		};
 		this.webpack = {
@@ -116,14 +151,15 @@ export class BaseConfig {
 			devtool: 'cheap-module-inline-source-map',
 			resolve: {
 				modules: [this.paths.src.path, 'node_modules'],
-				extensions: ['.json', '.ts', '.tsx', '.js', '.jsx'],
+				extensions: ['.json', '.ts', '.tsx', '.js', '.jsx', '.scss'],
 				unsafeCache: true
 			},
 			module: {
 				rules: [
 					this.rules.prettier,
 					this.rules.tslint, this.rules.ts,
-					this.rules.html, this.rules.sass
+					this.rules.html, this.rules.sassglobal,
+					this.rules.sassangular, this.rules.base64inline
 				]
 			},
 			plugins: [

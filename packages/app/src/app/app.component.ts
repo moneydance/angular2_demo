@@ -1,25 +1,20 @@
-import { Inject, Component } from '@angular/core';
-import { UIRouter } from '@uirouter/angular';
-import { AuthomStateDeclaration } from 'common/uirouter';
+import { Component } from '@angular/core';
+import { Ng2StateDeclaration } from '@uirouter/angular';
 
 @Component({
 	selector: 'app',
-	templateUrl: 'app.html'
+	templateUrl: 'app.html',
+	styleUrls: ['app.scss']
 })
 export class AppComponent {
-	public title: string = 'hey';
-	public states: AuthomStateDeclaration = this.uiRouter.stateService.get();
-	constructor(@Inject(UIRouter) private uiRouter: UIRouter) {
-		console.log(uiRouter);
-		console.log(this.states);
-	}
+	public states: any[] = [
+		{ name: 'Home', state: 'app.home' },
+		{ name: 'Projects', state: 'app.projects' }
+	];
 }
 
-export const APP_STATE: AuthomStateDeclaration = {
+export const APP_STATE: Ng2StateDeclaration = {
 	name: 'app',
 	url: '/app',
-	component: AppComponent,
-	data: {
-		auth: true
-	}
+	component: AppComponent
 };
