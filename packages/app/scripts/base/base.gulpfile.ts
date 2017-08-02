@@ -9,11 +9,6 @@ import * as childProcess from 'child_process';
 @Gulpclass
 export class BaseGulpFile {
 	private run:boolean = false;
-	private spawnConfig:any = {
-		shell:true,
-		detached: true,
-		stdio: ['ignore', 1, 2, 'ipc']
-	};
 
 	constructor(protected config:any) {}
 	/**
@@ -57,7 +52,7 @@ export class BaseGulpFile {
 	@Task('webpack')
 	public pack(cb) {
 		const webpack_watch = childProcess
-			.spawn('gulp', ['spawn_webpack_process'], this.spawnConfig);
+			.spawn('gulp', ['spawn_webpack_process'], this.config.spawn);
 		webpack_watch.on('message', (msg) => {
 			if (msg.done) {
 				cb();

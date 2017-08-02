@@ -12,6 +12,7 @@ export class BaseConfig {
 	public readonly baseDir: string;
 	public paths: any;
 	public ignored: any;
+	public spawn: any;
 	public extracters: any;
 	public rules: any;
 	public webpack: any;
@@ -45,6 +46,11 @@ export class BaseConfig {
 			},
 		};
 		this.ignored = /node_modules/;
+		this.spawn = {
+			shell:true,
+			detached: true,
+			stdio: ['ignore', 1, 2, 'ipc']
+		};
 		const sass = {
 			test: /\.scss$/,
 			use: [
