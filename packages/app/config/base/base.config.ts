@@ -69,15 +69,13 @@ export class BaseConfig {
 		};
 		// https://stackoverflow.com/questions/40454094/load-some-css-with-style-loader-and-some-css-with-to-string-loader-in-webpack-2
 		// styles are loaded globally in html script tag
-		const sassglobal = Object.assign({
-			exclude: this.paths.app.path
-		}, sass);
-		sassglobal.use.unshift('style-loader');
+		const sassGlobalOverride = { exclude: this.paths.app.path };
+		const sassGlobal = Object.assign(sassGlobalOverride, sass);
+		sassGlobal.use.unshift('style-loader');
 		// styles must be loaded as strings in angular templates
-		const sassangular = Object.assign({
-			include: this.paths.app.path
-		}, sass);
-		sassangular.use.unshift('to-string-loader');
+		const sassAngularOverride = { include: this.paths.app.path };
+		const sassAngular = Object.assign(sassAngularOverride, sass);
+		sassAngular.use.unshift('to-string-loader');
 		this.rules = {
 			tslint: {
 				test: /\.ts$/,
@@ -94,7 +92,8 @@ export class BaseConfig {
 			},
 			ts: {
 				test: /\.tsx?$/,
-				use:[{
+				use: [
+					{
 						loader: 'happypack/loader',
 						options: {
 							id: 'ts'
@@ -104,7 +103,7 @@ export class BaseConfig {
 				],
 				exclude: this.ignored
 			},
-			happyts: {
+			happyTS: {
 				id: 'ts',
 				threads: 3,
 				loaders: [{
@@ -130,9 +129,9 @@ export class BaseConfig {
 					customAttrAssign: [/\)?\]?=/]
 				}
 			},
-			sassglobal: sassglobal,
-			sassangular: sassangular,
-			base64inline: {
+			sassGlobal: sassGlobal,
+			sassAngular: sassAngular,
+			base64Inline: {
 				test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
 				use: 'base64-inline-loader'
 			},
@@ -164,8 +163,8 @@ export class BaseConfig {
 			module: {
 				rules: [
 					this.rules.tslint, this.rules.ts,
-					this.rules.html, this.rules.sassglobal,
-					this.rules.sassangular, this.rules.base64inline
+					this.rules.html, this.rules.sassGlobal,
+					this.rules.sassAngular, this.rules.base64Inline
 				]
 			},
 			plugins: [
@@ -176,7 +175,7 @@ export class BaseConfig {
 				new ForkTsCheckerWebpackPlugin({
 					tsconfig: this.paths.tsconfig.path
 				}),
-				new HappyPack(this.rules.happyts),
+				new HappyPack(this.rules.happyTS),
 				new webpack.optimize.CommonsChunkPlugin({
 					name: 'vendor',
 					minChunks: module => /node_modules/.test(module.resource)
