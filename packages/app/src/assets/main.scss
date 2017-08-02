@@ -1,5 +1,8 @@
-@import "./shared";
+@import 'compass-mixins/lib/compass';
+@import './core';
+@import './typography/fonts';
 
 body {
-	@include DefaultFont
+	font-family: $default-font-family;
+	margin: 0;
 }
