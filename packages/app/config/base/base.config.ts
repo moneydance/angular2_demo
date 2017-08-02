@@ -9,48 +9,53 @@ const dir = __dirname;
 const baseDir = path.join(dir, "../..");
 
 export class BaseConfig {
-	public readonly baseDir:string;
-	public paths:any;
-	public prettier: any;
-	public extracters:any;
-	public rules:any;
-	public webpack:any;
+	public readonly baseDir: string;
+	public paths: any;
+	public extracters: any;
+	public rules: any;
+	public webpack: any;
 
 	constructor() {
 		this.baseDir = baseDir;
 		this.paths = {
-			src: { path: path.join(this.baseDir, 'src/') },
+			src: {
+				path: path.join(this.baseDir, 'src/')
+			},
+			app: {
+				path: path.join(this.baseDir, 'src/app/')
+			},
 			entry: {
 				main: path.join(this.baseDir, 'src/main.ts'),
 			},
-			compass: { path: path.join(this.baseDir, 'node_modules/compass-mixins/lib') },
-			ignored: { path: /node_modules/ },
-			index: { path: path.join(this.baseDir, 'src/index.html') },
-			dist: { path: path.join(this.baseDir, 'dist/') },
-			tsconfig: { path: path.join(this.baseDir, 'tsconfig.json') },
-			tslint: { path: path.join(this.baseDir, 'config/tslint.json') },
-		};
-		this.prettier = {
-			printWidth: 80,
-			tabWidth: 2,
-			useTabs: true,
-			semi: true,
-			singleQuote: true,
-			bracketSpacing: true,
-			parser: "typescript"
+			compass: {
+				path: path.join(this.baseDir, 'node_modules/compass-mixins/lib')
+			},
+			ignored: {
+				path: /node_modules/
+			},
+			index: {
+				path: path.join(this.baseDir, 'src/index.html')
+			},
+			dist: {
+				path: path.join(this.baseDir, 'dist/')
+			},
+			tsconfig: {
+				path: path.join(this.baseDir, 'tsconfig.json')
+			},
+			tslint: {
+				path: path.join(this.baseDir, 'config/tslint.json')
+			},
 		};
 		const sass = {
 			test: /\.scss$/,
- 			use: [
-				'css-loader',
-				{
+			use: [
+				'css-loader', {
 					loader: 'resolve-url-loader',
 					options: {
 						root: this.paths.src.path,
 						includeRoot: true
 					}
-				},
-				{
+				}, {
 					loader: 'sass-loader',
 					options: {
 						includePaths: [
@@ -62,18 +67,18 @@ export class BaseConfig {
 				}
 			]
 		};
-		const sassglobal = Object.assign({ exclude: this.paths.src.path }, sass);
+		// https://stackoverflow.com/questions/40454094/load-some-css-with-style-loader-and-some-css-with-to-string-loader-in-webpack-2
+		// styles are loaded globally in html script tag
+		const sassglobal = Object.assign({
+			exclude: this.paths.app.path
+		}, sass);
 		sassglobal.use.unshift('style-loader');
-		const sassangular = Object.assign({ include: this.paths.src.path }, sass);
+		// styles must be loaded as strings in angular templates
+		const sassangular = Object.assign({
+			include: this.paths.app.path
+		}, sass);
 		sassangular.use.unshift('to-string-loader');
 		this.rules = {
-			prettier: {
-				test: /\.tsx?$/,
-				loader: 'prettier-loader',
-				enforce: 'pre',
-				options: this.prettier,
-				exclude: /node_modules/
-			},
 			tslint: {
 				test: /\.ts$/,
 				loader: 'tslint-loader',
@@ -89,10 +94,11 @@ export class BaseConfig {
 			},
 			ts: {
 				test: /\.tsx?$/,
-				use: [
-					{
+				use: [{
 						loader: 'happypack/loader',
-						options: { id:'ts' }
+						options: {
+							id: 'ts'
+						}
 					},
 					'angular2-template-loader',
 				],
@@ -101,15 +107,13 @@ export class BaseConfig {
 			happyts: {
 				id: 'ts',
 				threads: 3,
-				loaders: [
-					{
-						path: 'ts-loader',
-						query: {
-							happyPackMode: true,
-							transpileOnly: true
-						}
+				loaders: [{
+					path: 'ts-loader',
+					query: {
+						happyPackMode: true,
+						transpileOnly: true
 					}
-				]
+				}]
 			},
 			html: {
 				test: /\.html$/,
@@ -119,10 +123,11 @@ export class BaseConfig {
 					removeAttributeQuotes: false,
 					caseSensitive: true,
 					customAttrSurround: [
-						[/#/, /(?:)/], [/\*/, /(?:)/],
+						[/#/, /(?:)/],
+						[/\*/, /(?:)/],
 						[/\[?\(?/, /(?:)/]
 					],
-					customAttrAssign: [ /\)?\]?=/ ]
+					customAttrAssign: [/\)?\]?=/]
 				}
 			},
 			sassglobal: sassglobal,
@@ -131,22 +136,24 @@ export class BaseConfig {
 				test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
 				use: 'base64-inline-loader'
 			},
-			url: {
-				test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-				loader: 'url-loader'
-			}
 		};
 		this.webpack = {
 			entry: this.paths.entry,
-			output: {path: this.paths.dist.path, filename: '[name].js'},
+			output: {
+				path: this.paths.dist.path,
+				filename: '[name].js'
+			},
 			watch: true,
 			watchOptions: {
-				aggregateTimeout: 0, poll: 300,
+				aggregateTimeout: 0,
+				poll: 300,
 				ignored: this.paths.ignored.path
 			},
 			stats: {
-				colors: true, cached: false, chunks: true,
-				timings:true
+				colors: true,
+				cached: false,
+				chunks: true,
+				timings: true
 			},
 			devtool: 'cheap-module-inline-source-map',
 			resolve: {
@@ -156,23 +163,27 @@ export class BaseConfig {
 			},
 			module: {
 				rules: [
-					this.rules.prettier,
 					this.rules.tslint, this.rules.ts,
 					this.rules.html, this.rules.sassglobal,
 					this.rules.sassangular, this.rules.base64inline
 				]
 			},
 			plugins: [
-				new ForkTsCheckerWebpackPlugin({tsconfig: this.paths.tsconfig.path}),
-				new HappyPack(this.rules.happyts),
-				new webpack.ContextReplacementPlugin(
+				new webpack.ContextReplacementPlugin(                                  // related to this issue https://github.com/angular/angular/issues/11580
 					/angular(\\|\/)core(\\|\/)@angular/,
-					this.paths.src.path),
+					path.resolve(__dirname, this.paths.src.path)
+				),
+				new ForkTsCheckerWebpackPlugin({
+					tsconfig: this.paths.tsconfig.path
+				}),
+				new HappyPack(this.rules.happyts),
 				new webpack.optimize.CommonsChunkPlugin({
 					name: 'vendor',
 					minChunks: module => /node_modules/.test(module.resource)
 				}),
-				new HtmlWebpackPlugin({template: this.paths.index.path})
+				new HtmlWebpackPlugin({
+					template: this.paths.index.path
+				})
 			]
 		};
 	}
