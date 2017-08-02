@@ -11,6 +11,7 @@ const baseDir = path.join(dir, "../..");
 export class BaseConfig {
 	public readonly baseDir: string;
 	public paths: any;
+	public ignored: any;
 	public extracters: any;
 	public rules: any;
 	public webpack: any;
@@ -24,14 +25,11 @@ export class BaseConfig {
 			app: {
 				path: path.join(this.baseDir, 'src/app/')
 			},
-			entry: {
-				main: path.join(this.baseDir, 'src/main.ts'),
+			main: {
+				path: path.join(this.baseDir, 'src/main.ts'),
 			},
-			compass: {
-				path: path.join(this.baseDir, 'node_modules/compass-mixins/lib')
-			},
-			ignored: {
-				path: /node_modules/
+			node_modules: {
+				path: path.join(this.baseDir, 'node_modules')
 			},
 			index: {
 				path: path.join(this.baseDir, 'src/index.html')
@@ -46,21 +44,23 @@ export class BaseConfig {
 				path: path.join(this.baseDir, 'config/tslint.json')
 			},
 		};
+		this.ignored = /node_modules/;
 		const sass = {
 			test: /\.scss$/,
 			use: [
-				'css-loader', {
+				'css-loader',
+				{
 					loader: 'resolve-url-loader',
 					options: {
 						root: this.paths.src.path,
 						includeRoot: true
 					}
-				}, {
+				},
+				{
 					loader: 'sass-loader',
 					options: {
 						includePaths: [
-							this.paths.compass.path,
-							this.paths.src.path
+							this.paths.node_modules.path,
 						],
 						sourceMap: true
 					}
@@ -90,11 +90,11 @@ export class BaseConfig {
 					tsConfigFile: this.paths.tsconfig.path,
 					configFile: this.paths.tslint.path
 				},
-				exclude: /node_modules/
+				exclude: this.ignored
 			},
 			ts: {
 				test: /\.tsx?$/,
-				use: [{
+				use:[{
 						loader: 'happypack/loader',
 						options: {
 							id: 'ts'
@@ -102,7 +102,7 @@ export class BaseConfig {
 					},
 					'angular2-template-loader',
 				],
-				exclude: /node_modules/
+				exclude: this.ignored
 			},
 			happyts: {
 				id: 'ts',
@@ -113,7 +113,7 @@ export class BaseConfig {
 						happyPackMode: true,
 						transpileOnly: true
 					}
-				}]
+				}],
 			},
 			html: {
 				test: /\.html$/,
@@ -138,7 +138,7 @@ export class BaseConfig {
 			},
 		};
 		this.webpack = {
-			entry: this.paths.entry,
+			entry: { main: this.paths.main.path },
 			output: {
 				path: this.paths.dist.path,
 				filename: '[name].js'
@@ -147,7 +147,7 @@ export class BaseConfig {
 			watchOptions: {
 				aggregateTimeout: 0,
 				poll: 300,
-				ignored: this.paths.ignored.path
+				ignored: this.ignored
 			},
 			stats: {
 				colors: true,
