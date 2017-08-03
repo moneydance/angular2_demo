@@ -1,0 +1,11 @@
+@import '~assets/core';
+$burger-diameter: 50px;
+$circle-border-radius: 50%;
+
+:host {
+	display: block;
+	width: $burger-diameter;
+	height: $burger-diameter;
+	border-radius: $circle-border-radius;
+	background: $primary-color;
+}

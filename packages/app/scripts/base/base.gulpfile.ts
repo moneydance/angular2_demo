@@ -4,7 +4,6 @@ import * as gulp from 'gulp';
 import * as del from 'del';
 import * as webpack from 'webpack';
 import * as gutil from 'gulp-util';
-import * as childProcess from 'child_process';
 
 @Gulpclass
 export class BaseGulpFile {
@@ -24,8 +23,8 @@ export class BaseGulpFile {
 	 * Task that runs in a seperate non blocking webpack process so watch
 	 * doesnt cause gulp task to run indefinetly
 	 */
-	@Task('spawn_webpack_process')
-	public spawn_webpack_process(cb) {
+	@Task('webpack')
+	public pack(cb) {
 		const outputHandler = (err, stats) => {
 			if(err) {
 				new gutil.PluginError(
@@ -35,30 +34,12 @@ export class BaseGulpFile {
 			gutil.log('[webpack]', stats.toString(this.config.webpack.stats));
 			if (!this.config.webpack.watch) {
 				cb();
-				process.send({done: true});
 			} else if (!this.run) {
 				this.run = true;
 				cb();
-				process.send({done: true});
-				process.disconnect();
 			}
 		}
 		webpack(this.config.webpack, outputHandler);
-	}
-	/**
-	* Task creates a new process that runs gulp spawn_webpack_process.
-	* new process is non blocking and allows the gulpfile to complete.
-	*/
-	@Task('webpack')
-	public pack(cb) {
-		const webpack_watch = childProcess
-			.spawn('gulp', ['spawn_webpack_process'], this.config.spawn);
-		webpack_watch.on('message', (msg) => {
-			if (msg.done) {
-				cb();
-			}
-		});
-		webpack_watch.unref();
 	}
 
 	/**

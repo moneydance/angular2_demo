@@ -3,7 +3,8 @@ import { Ng2StateDeclaration } from '@uirouter/angular';
 
 @Component({
 	selector: 'home',
-	templateUrl: 'home.html'
+	styleUrls: ['home.scss'],
+	templateUrl: 'home.html',
 })
 export class HomeComponent {
 	public home = 'Home';

@@ -3,7 +3,7 @@ services:
     base:
         build: ./packages/app
         env_file: .env
-        command: npm run gulp
+        command: gulp
         volumes:
             - ./packages/app/src:/app/src
             - dist:/app/dist

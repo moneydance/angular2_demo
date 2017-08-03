@@ -1,6 +1,6 @@
 {
 	"name": "angular2Demo",
-	"version": "1.1.0-0",
+	"version": "1.0.0",
 	"author": "Ben Pusey",
 	"description": "Demo for Angular2",
 	"contributors": [
@@ -10,7 +10,6 @@
 		}
 	],
 	"scripts": {
-		"gulp": "gulp"
 	},
 	"dependencies": {
 		"compass-mixins": "0.12.10",
@@ -26,9 +25,11 @@
 		"core-js": "^2.4.1",
 		"rxjs": "^5.1.0",
 		"zone.js": "^0.8.4",
-		"paper": "0.11.4"
+		"@angular/material": "2.0.0-beta.8",
+		"lodash": "4.17.4"
 	},
 	"devDependencies": {
+		"@types/lodash": "4.14.71",
 		"@types/node": "^7.0.28",
 		"@types/handlebars": "4.0.33",
 		"angular2-template-loader": "0.6.2",
@@ -39,7 +40,7 @@
 		"gulp": "3.9.1",
 		"gulp-util": "3.0.8",
 		"gulpclass-extendable": "0.0.8",
-		"html-loader": "0.4.5",
+		"raw-loader": "0.5.1",
 		"node-sass": "4.5.3",
 		"sass-loader": "6.0.6",
 		"style-loader": "0.18.2",

@@ -10,7 +10,7 @@ import { CoreModule } from 'core/core.module';
 
 @NgModule({
 	imports: [
-		UIRouterModule.forRoot({ config: uiRouterConfig }),
+		UIRouterModule.forRoot({ config: uiRouterConfig, useHash: true }),
 		BrowserModule,
 		CoreModule.forRoot(),
 		AppModule

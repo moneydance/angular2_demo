@@ -4,6 +4,7 @@ import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as HappyPack from 'happypack';
+import { merge } from 'lodash';
 
 const dir = __dirname;
 const baseDir = path.join(dir, "../..");
@@ -12,8 +13,6 @@ export class BaseConfig {
 	public readonly baseDir: string;
 	public paths: any;
 	public ignored: any;
-	public spawn: any;
-	public extracters: any;
 	public rules: any;
 	public webpack: any;
 
@@ -23,8 +22,8 @@ export class BaseConfig {
 			src: {
 				path: path.join(this.baseDir, 'src/')
 			},
-			app: {
-				path: path.join(this.baseDir, 'src/app/')
+			assets: {
+				path: path.join(this.baseDir, 'src/assets/')
 			},
 			main: {
 				path: path.join(this.baseDir, 'src/main.ts'),
@@ -46,12 +45,7 @@ export class BaseConfig {
 			},
 		};
 		this.ignored = /node_modules/;
-		this.spawn = {
-			shell:true,
-			detached: true,
-			stdio: ['ignore', 1, 2, 'ipc']
-		};
-		const sass = {
+		const sass: any = {
 			test: /\.scss$/,
 			use: [
 				'css-loader',
@@ -59,7 +53,8 @@ export class BaseConfig {
 					loader: 'resolve-url-loader',
 					options: {
 						root: this.paths.src.path,
-						includeRoot: true
+						includeRoot: true,
+						sourceMap: true
 					}
 				},
 				{
@@ -75,12 +70,12 @@ export class BaseConfig {
 		};
 		// https://stackoverflow.com/questions/40454094/load-some-css-with-style-loader-and-some-css-with-to-string-loader-in-webpack-2
 		// styles are loaded globally in html script tag
-		const sassGlobalOverride = { exclude: this.paths.app.path };
-		const sassGlobal = Object.assign(sassGlobalOverride, sass);
+		const sassGlobalOverride: any = { include: this.paths.assets.path };
+		const sassGlobal: any = merge(sassGlobalOverride, sass);
 		sassGlobal.use.unshift('style-loader');
 		// styles must be loaded as strings in angular templates
-		const sassAngularOverride = { include: this.paths.app.path };
-		const sassAngular = Object.assign(sassAngularOverride, sass);
+		const sassAngularOverride: any = { exclude: this.paths.assets.path };
+		const sassAngular: any = merge(sassAngularOverride, sass);
 		sassAngular.use.unshift('to-string-loader');
 		this.rules = {
 			tslint: {
@@ -122,18 +117,7 @@ export class BaseConfig {
 			},
 			html: {
 				test: /\.html$/,
-				loader: 'html-loader',
-				options: {
-					minimize: true,
-					removeAttributeQuotes: false,
-					caseSensitive: true,
-					customAttrSurround: [
-						[/#/, /(?:)/],
-						[/\*/, /(?:)/],
-						[/\[?\(?/, /(?:)/]
-					],
-					customAttrAssign: [/\)?\]?=/]
-				}
+				loader: 'raw-loader',
 			},
 			sassGlobal: sassGlobal,
 			sassAngular: sassAngular,
@@ -163,14 +147,16 @@ export class BaseConfig {
 			devtool: 'cheap-module-inline-source-map',
 			resolve: {
 				modules: [this.paths.src.path, 'node_modules'],
-				extensions: ['.json', '.ts', '.tsx', '.js', '.jsx', '.scss'],
-				unsafeCache: true
+				extensions: [
+					'.json', '.ts', '.tsx',
+					'.js', '.jsx', '.scss', 'css'
+				],
 			},
 			module: {
 				rules: [
 					this.rules.tslint, this.rules.ts,
-					this.rules.html, this.rules.sassGlobal,
-					this.rules.sassAngular, this.rules.base64Inline
+					this.rules.html, this.rules.sassAngular,
+					this.rules.sassGlobal, this.rules.base64Inline
 				]
 			},
 			plugins: [
