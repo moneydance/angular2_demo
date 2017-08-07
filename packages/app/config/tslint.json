@@ -9,7 +9,7 @@
 		"array-bracket-spacing": [false],
 		"no-console": [false],
 		"object-literal-sort-keys": [false],
-		"no-unused-variable": [true],
+		"no-unused-variable": [false],
 		"import-name": [false],
 		"variable-name": [false],
 		"ordered-imports": [false],

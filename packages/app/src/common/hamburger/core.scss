@@ -1,0 +1,18 @@
+@import '~assets/core';
+
+$ball-z-index: 100;
+$ball-color: $primary-color;
+$ball-icon-color: $white;
+$ball-diameter: 75px;
+$ball-hover-size: 1.1;
+
+%ball {
+	display: inline-block;
+	width: $ball-diameter;
+	height: $ball-diameter;
+	border-radius: 50%;
+	background: $ball-color;
+  	transform:translate3d(0,0,0);
+  	transition:transform ease-out 200ms;
+}
+

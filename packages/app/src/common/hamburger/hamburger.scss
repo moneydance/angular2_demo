@@ -1,0 +1,52 @@
+@import "./core.scss";
+
+$burger-active-size: .75;
+$patty_width: $ball-diameter/3;
+$patty_height: 3px;
+$patty_spacing: $patty_width/2 - $patty_height;
+
+:host {
+	position: relative;
+	display: block;
+}
+
+.burger {
+	@extend %ball;
+	z-index: $ball-z-index;
+	position: relative;
+	&:hover {
+		transform: scale($ball-hover-size, $ball-hover-size) translate3d(0,0,0);
+	}
+	:nth-child(1) {
+  		transform: translate3d(0,-$patty_spacing,0);
+	}
+	:nth-child(2) {
+		transform: translate3d(0, 0, 0);
+	}
+	:nth-child(3) {
+  		transform: translate3d(0,$patty_spacing,0);
+	}
+	&.active {
+		transform: scale($burger-active-size);
+		:nth-child(1) {
+			transform: rotate(45deg) translate3d(0,0,0);
+		}
+		:nth-child(2) {
+			transform: scale(0.00001,1) translate3d(0,0,0);
+		}
+		:nth-child(3) {
+			transform: rotate(-45deg) translate3d(0,0,0);
+		}
+	}
+	.patty {
+  		transition:transform 200ms;
+		width: $patty_width;
+		height: $patty_height;
+		position: absolute;
+		display: block;
+		background: $ball-icon-color;
+		left: calc(50% - #{$patty_width/2});
+		top: calc(50% - #{$patty_height/2});
+	}
+}
+

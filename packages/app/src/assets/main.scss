@@ -1,6 +1,9 @@
 @import 'compass-mixins/lib/compass';
 @import './core';
 @import './typography/fonts';
+html {
+	min-height: 100vh;
+}
 
 body {
 	font-family: $default-font-family;
