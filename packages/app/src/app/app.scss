@@ -10,10 +10,10 @@
     	align-items: center;
     	justify-content: center;
 	}
+
+	nav {
+		margin: 10px;
+		flex: 0 0 auto;
+	}
 }
 
-bp-hamburger {
-	display: flex;
-	flex: 0 0 auto;
-	margin: 10px;
-}
