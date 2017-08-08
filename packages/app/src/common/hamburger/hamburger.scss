@@ -1,6 +1,7 @@
 @import "./core.scss";
 
 $burger-active-size: .75;
+$burger-hover-size: 1.2;
 $patty_width: $ball-diameter/3;
 $patty_height: 3px;
 $patty_spacing: $patty_width/2 - $patty_height;
@@ -15,7 +16,7 @@ $patty_spacing: $patty_width/2 - $patty_height;
 	z-index: $ball-z-index;
 	position: relative;
 	&:hover {
-		transform: scale($ball-hover-size, $ball-hover-size) translate3d(0,0,0);
+		transform: scale($burger-hover-size, $burger-hover-size) translate3d(0,0,0);
 	}
 	:nth-child(1) {
   		transform: translate3d(0,-$patty_spacing,0);
