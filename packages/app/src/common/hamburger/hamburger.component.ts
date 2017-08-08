@@ -25,7 +25,7 @@ export class HamburgerComponent {
 		this.active = !this.active;
 		if (this.active) {
 			this.items.forEach((item: HamburgerItemComponent, idx: number) => {
-				const position: Position = { x: 100, y: 0, z: 0 };
+				const position: Position = { x: 100 * (idx + 1), y: 0, z: 0 };
 				item.position = position;
 			});
 		} else {

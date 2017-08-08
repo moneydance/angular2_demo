@@ -3,16 +3,17 @@
 $ball-z-index: 100;
 $ball-color: $primary-color;
 $ball-icon-color: $white;
-$ball-diameter: 75px;
-$ball-hover-size: 1.1;
+$ball-diameter: 65px;
 
 %ball {
 	display: inline-block;
 	width: $ball-diameter;
 	height: $ball-diameter;
-	border-radius: 50%;
+	border-radius: $ball-diameter/2;
 	background: $ball-color;
   	transform:translate3d(0,0,0);
   	transition:transform ease-out 200ms;
+	transform: scale(1.1,1.1);
+	box-shadow: 7px 0px 15px -3px rgba(128, 128, 128, 0.9);
 }
 
