@@ -1,0 +1,43 @@
+{
+	"name": "angular2Demo",
+	"version": "1.0.0",
+	"author": "Ben Pusey",
+	"description": "Demo for Angular2",
+	"contributors": [
+		{
+			"name": "Ben Pusey",
+			"email": "bpusey@bu.edu"
+		}
+	],
+	"scripts": {
+	},
+	"dependencies": {
+		"koa": "^2.0.0",
+		"koa-logger": "^2.0.0",
+		"koa-router": "7.2.1",
+		"lodash": "4.17.4"
+	},
+	"devDependencies": {
+		"@types/lodash": "4.14.71",
+		"@types/node": "^7.0.28",
+		"@types/handlebars": "4.0.33",
+		"@types/koa": "2.0.39",
+		"ts-loader": "2.2.2",
+		"fork-ts-checker-webpack-plugin": "0.2.6",
+		"del": "3.0.0",
+		"gulp": "3.9.1",
+		"gulp-util": "3.0.8",
+		"gulpclass-extendable": "0.0.8",
+		"ts-node": "3.0.2",
+		"tslint": "5.2.0",
+		"tslint-config-airbnb": "5.2.1",
+		"tslint-loader": "3.5.3",
+		"typescript": "2.2.2",
+		"happypack":"4.0.0-beta.1",
+		"webpack": "3.4.1",
+		"webpack-node-externals": "1.6.0",
+		"yargs": "8.0.2",
+		"gulp-nodemon": "2.2.1"
+	},
+	"engine": "node >= 0.10.x"
+}

@@ -24,14 +24,22 @@ export class HamburgerComponent {
 	private onClick(event) {
 		this.active = !this.active;
 		if (this.active) {
-			this.items.forEach((item: HamburgerItemComponent, idx: number) => {
-				const position: Position = { x: 100 * (idx + 1), y: 0, z: 0 };
-				item.position = position;
-			});
+			this.setItemComponents();
 		} else {
-			this.items.forEach((item: HamburgerItemComponent, idx: number) => {
-				item.resetPosition();
-			});
+			this.resetItemComponents();
 		}
+	}
+
+	private setItemComponents() {
+		this.items.forEach((item: HamburgerItemComponent, idx: number) => {
+			const position: Position = { x: 100 * (idx + 1), y: 0, z: 0 };
+			item.position = position;
+		});
+	}
+
+	private resetItemComponents() {
+		this.items.forEach((item: HamburgerItemComponent, idx: number) => {
+			item.resetPosition();
+		});
 	}
 }
