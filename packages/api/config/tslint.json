@@ -1,0 +1,22 @@
+{
+	"extends": [
+		"tslint:latest",
+		"tslint-config-airbnb"
+	],
+	"rules": {
+		"typedef-whitespace": [false],
+		"no-increment-decrement": false,
+		"array-bracket-spacing": [false],
+		"no-console": [false],
+		"object-literal-sort-keys": [false],
+		"no-unused-variable": [false],
+		"import-name": [false],
+		"variable-name": [false],
+		"ordered-imports": [false],
+		"interface-name": [false],
+		"trailing-comma": [false],
+		"ter-indent": [true, "tab"],
+		"indent": [true, "tab", 1]
+	}
+}
+
