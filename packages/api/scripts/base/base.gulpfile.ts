@@ -4,13 +4,11 @@ import * as gulp from 'gulp';
 import * as del from 'del';
 import * as webpack from 'webpack';
 import * as gutil from 'gulp-util';
-import * as yargs from 'yargs';
 import * as nodemon from 'gulp-nodemon'
 
 @Gulpclass
 export class BaseGulpFile {
 	private run:boolean = false;
-	private watch:boolean = false;
 	constructor(protected config:any) {}
 	/**
 	 * Task to clean the dist folder by running force rm -rf on it.
@@ -30,23 +28,11 @@ export class BaseGulpFile {
 		webpack(this.config.webpack, this.webpackOutputHandler(cb));
 	}
 
-	@Task('webpack-watch')
-	public watchPack(cb) {
-		this.watch = true;
-		webpack(
-			{ ...this.config.webpack, ...{ watch: true } },
- 			this.webpackOutputHandler(cb)
-		);
-	}
-
 	/**
 	 * Task to compile code base
 	 */
 	@SequenceTask('compile')
 	public compile() {
-		if (yargs.argv.watch) {
-			return ['clean', 'webpack-watch'];
-		}
 		return ['clean', 'webpack'];
 	}
 
@@ -70,7 +56,7 @@ export class BaseGulpFile {
 				);
 			}
 			gutil.log('[webpack]', stats.toString(this.config.webpack.stats));
-			if (!this.watch) {
+			if (!this.config.webpack.watch) {
 				cb();
 			} else if (!this.run) {
 				this.run = true;

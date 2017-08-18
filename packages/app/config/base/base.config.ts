@@ -84,7 +84,7 @@ export class BaseConfig {
 				enforce: 'pre',
 				options: {
 					formatter: 'stylish',
-					failOnHint: true,
+					emitErrors: true,
 					typeCheck: true,
 					tsConfigFile: this.paths.tsconfig.path,
 					configFile: this.paths.tslint.path
@@ -141,7 +141,6 @@ export class BaseConfig {
 			stats: {
 				colors: true,
 				cached: false,
-				chunks: true,
 				timings: true
 			},
 			devtool: 'cheap-module-inline-source-map',
