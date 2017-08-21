@@ -36,8 +36,8 @@ export class BaseGulpFile {
 		return ['clean', 'webpack'];
 	}
 
-	@Task('koa')
-	public koa(cb) {
+	@Task('nest')
+	public nest(cb) {
 		nodemon({
 			script: this.config.paths.dist_entry.path
 		});
@@ -45,7 +45,7 @@ export class BaseGulpFile {
 
 	@SequenceTask('start')
 	public start(cb) {
-		return ['compile', 'koa'];
+		return ['compile', 'nest'];
 	}
 
 	protected webpackOutputHandler(cb) {

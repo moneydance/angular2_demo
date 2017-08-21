@@ -12,16 +12,23 @@
 	"scripts": {
 	},
 	"dependencies": {
-		"koa": "^2.0.0",
-		"koa-logger": "^2.0.0",
-		"koa-router": "7.2.1",
+		"@nestjs/common": "3.0.0",
+		"@nestjs/microservices": "3.0.1",
+		"@nestjs/core": "3.0.1",
+   		"@nestjs/websockets": "3.0.0",
+		"express": "4.15.4",
+		"body-parser": "1.17.2",
+		"rxjs": "5.4.3",
+		"reflect-metadata": "0.1.10",
+		"apollo-server-express": "1.1.0",
+		"graphql": "0.10.5",
 		"lodash": "4.17.4"
 	},
 	"devDependencies": {
 		"@types/lodash": "4.14.71",
 		"@types/node": "^7.0.28",
 		"@types/handlebars": "4.0.33",
-		"@types/koa": "2.0.39",
+		"@types/express": "4.0.36",
 		"ts-loader": "2.2.2",
 		"fork-ts-checker-webpack-plugin": "0.2.6",
 		"del": "3.0.0",

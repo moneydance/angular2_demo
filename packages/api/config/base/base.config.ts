@@ -21,8 +21,8 @@ export class BaseConfig {
 			src: {
 				path: path.join(this.baseDir, 'src/')
 			},
-			main: {
-				path: path.join(this.baseDir, 'src/main.ts'),
+			entry: {
+				path: path.join(this.baseDir, 'src/server.ts'),
 			},
 			node_modules: {
 				path: path.join(this.baseDir, 'node_modules')
@@ -31,7 +31,7 @@ export class BaseConfig {
 				path: path.join(this.baseDir, 'dist/')
 			},
 			dist_entry: {
-				path: path.join(this.baseDir, 'dist/main.js')
+				path: path.join(this.baseDir, 'dist/server.js')
 			},
 			tsconfig: {
 				path: path.join(this.baseDir, 'tsconfig.json')
@@ -80,7 +80,7 @@ export class BaseConfig {
 			},
 		};
 		this.webpack = {
-			entry: { main: [this.paths.main.path] },
+			entry: { server: [this.paths.entry.path] },
 			output: {
 				path: this.paths.dist.path,
 				filename: '[name].js'
