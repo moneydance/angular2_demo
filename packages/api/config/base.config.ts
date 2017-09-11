@@ -4,9 +4,10 @@ import * as webpack from 'webpack';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as HappyPack from 'happypack';
 import * as nodeExternals from 'webpack-node-externals';
+import * as yargs from 'yargs';
 
 const dir = __dirname;
-const baseDir = path.join(dir, "../..");
+const baseDir = path.join(dir, "../");
 
 export class BaseConfig {
 	public readonly baseDir: string;
@@ -17,30 +18,6 @@ export class BaseConfig {
 
 	constructor() {
 		this.baseDir = baseDir;
-		this.paths = {
-			src: {
-				path: path.join(this.baseDir, 'src/')
-			},
-			entry: {
-				path: path.join(this.baseDir, 'src/server.ts'),
-			},
-			node_modules: {
-				path: path.join(this.baseDir, 'node_modules')
-			},
-			dist: {
-				path: path.join(this.baseDir, 'dist/')
-			},
-			dist_entry: {
-				path: path.join(this.baseDir, 'dist/server.js')
-			},
-			tsconfig: {
-				path: path.join(this.baseDir, 'tsconfig.json')
-			},
-			tslint: {
-				path: path.join(this.baseDir, 'config/tslint.json')
-			},
-		};
-		this.ignored = /node_modules/;
 		this.rules = {
 			tslint: {
 				test: /\.ts$/,
@@ -50,10 +27,10 @@ export class BaseConfig {
 					formatter: 'stylish',
 					emitErrors: true,
 					typeCheck: true,
-					tsConfigFile: this.paths.tsconfig.path,
-					configFile: this.paths.tslint.path
+					tsConfigFile: this.pathHelper('tsconfig.json'),
+					configFile: this.pathHelper('config/tslint.json')
 				},
-				exclude: this.ignored
+				exclude: /node_modules/
 			},
 			ts: {
 				test: /\.tsx?$/,
@@ -65,7 +42,7 @@ export class BaseConfig {
 						}
 					},
 				],
-				exclude: this.ignored
+				exclude: /node_modules/
 			},
 			happyTS: {
 				id: 'ts',
@@ -80,15 +57,16 @@ export class BaseConfig {
 			},
 		};
 		this.webpack = {
-			entry: { server: [this.paths.entry.path] },
+			watch: yargs.argv.watch,
+			entry: { server: this.pathHelper('src/server.ts') },
 			output: {
-				path: this.paths.dist.path,
+				path: this.pathHelper('dist/'),
 				filename: '[name].js'
 			},
 			watchOptions: {
 				aggregateTimeout: 0,
 				poll: 300,
-				ignored: this.ignored
+				ignored: /node_modules/
 			},
 			stats: {
 				colors: true,
@@ -97,7 +75,7 @@ export class BaseConfig {
 			},
 			devtool: 'cheap-module-inline-source-map',
 			resolve: {
-				modules: [this.paths.src.path, this.paths.node_modules.path],
+				modules: [this.pathHelper('src/'), this.pathHelper('node_modules/')],
 				extensions: [
 					'.json', '.ts', '.tsx',
 					'.js', '.jsx'
@@ -111,10 +89,13 @@ export class BaseConfig {
 			},
 			plugins: [
 				new ForkTsCheckerWebpackPlugin({
-					tsconfig: this.paths.tsconfig.path
+					tsconfig: this.pathHelper('tsconfig.json')
 				}),
 				new HappyPack(this.rules.happyTS),
 			]
 		};
+	}
+	public pathHelper(leaf: string) {
+		return path.join(this.baseDir, leaf);
 	}
 }
