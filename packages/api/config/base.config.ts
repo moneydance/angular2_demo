@@ -46,7 +46,7 @@ export class BaseConfig {
 			},
 			happyTS: {
 				id: 'ts',
-				threads: 3,
+				threads: 2,
 				loaders: [{
 					path: 'ts-loader',
 					query: {
@@ -64,9 +64,8 @@ export class BaseConfig {
 				filename: '[name].js'
 			},
 			watchOptions: {
-				aggregateTimeout: 0,
+				ignored: /node_modules/,
 				poll: 300,
-				ignored: /node_modules/
 			},
 			stats: {
 				colors: true,

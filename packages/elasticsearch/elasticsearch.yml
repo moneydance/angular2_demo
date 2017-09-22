@@ -1,0 +1,8 @@
+bootstrap.memory_lock: true
+xpack.security.enabled: false
+discovery.type: single-node
+http.enabled: true
+http.port: 9200
+transport.tcp.port: 9300
+network.bind_host: 0.0.0.0
+network.publish_host: 172.18.0.6

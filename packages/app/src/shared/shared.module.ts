@@ -9,11 +9,4 @@ import { FormsModule } from '@angular/forms';
 	imports: [CommonModule, FormsModule],
 	exports: [CommonModule, FormsModule]
 })
-export class CoreModule {
-	public static forRoot() {
-		return {
-			ngModule: CoreModule,
-			providers: []
-		};
-	}
-}
+export class SharedModule {}

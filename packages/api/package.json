@@ -35,6 +35,7 @@
 		"gulp": "3.9.1",
 		"gulp-util": "3.0.8",
 		"gulpclass-extendable": "0.0.8",
+		"gulp-sequence": "0.4.6",
 		"ts-node": "3.0.2",
 		"tslint": "5.2.0",
 		"tslint-config-airbnb": "5.2.1",

@@ -91,7 +91,8 @@ export abstract class BaseConfig {
 				filename: '[name].js'
 			},
 			watchOptions: {
-				ignored: /node_modules/
+				ignored: /node_modules/,
+				poll:300
 			},
 			stats: {
 				assets: false, colors: true, version: false,

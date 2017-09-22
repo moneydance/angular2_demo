@@ -1,5 +1,8 @@
 FROM node:boron
 
+# build file with PROD settings
+ENV ENV "PROD"
+
 # Create app directory
 RUN mkdir -p /app
 WORKDIR /app
@@ -12,3 +15,4 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+RUN gulp compile

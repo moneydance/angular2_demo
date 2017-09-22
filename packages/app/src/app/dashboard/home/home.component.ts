@@ -9,9 +9,3 @@ import { Ng2StateDeclaration } from '@uirouter/angular';
 export class HomeComponent {
 	public home = 'Home';
 }
-
-export const HOME_STATE: Ng2StateDeclaration = {
-	name: 'app.home',
-	url: '/home',
-	component: HomeComponent
-};
